@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diario de Entrenamiento</title>
+    <link rel="stylesheet" href="diario_entrenamiento.css">
+</head>
+<body>
+    <header>
+        <h1>Diario de Entrenamiento</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="#" onclick="logout()">Cerrar Sesión</a>
+        </nav>
+    </header>
+
+    <section class="form-section">
+        <h2>Registrar Nuevo Entrenamiento</h2>
+        <form id="form-entrenamiento">
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" required>
+
+            <label for="tipo_ejercicio">Ejercicio:</label>
+            <input type="text" id="tipo_ejercicio" name="tipo_ejercicio" placeholder="Ejemplo: Press de banca" required>
+
+            <label for="repeticiones">Repeticiones:</label>
+            <input type="number" id="repeticiones" name="repeticiones" min="0" required>
+
+            <label for="series">Series:</label>
+            <input type="number" id="series" name="series" min="0" required>
+
+            <label for="peso">Peso (kg):</label>
+            <input type="number" id="peso" name="peso" step="0.1">
+
+            <label for="tiempo">Tiempo (min):</label>
+            <input type="number" id="tiempo" name="tiempo" step="0.1">
+
+            <label for="notas">Notas:</label>
+            <textarea id="notas" name="notas" placeholder="Observaciones del entrenamiento"></textarea>
+
+            <button type="submit">Guardar Entrenamiento</button>
+        </form>
+    </section>
+
+    <section class="lista-entrenamientos">
+        <h2>Historial de Entrenamientos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Ejercicio</th>
+                    <th>Reps</th>
+                    <th>Series</th>
+                    <th>Peso (kg)</th>
+                    <th>Tiempo (min)</th>
+                    <th>Notas</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se listarán los entrenamientos -->
+                <tr>
+                    <td>0000-00-00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button class="edit-btn">Editar</button>
+                        <button class="delete-btn">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <script>
+    let idEditando = null;  
+    document.addEventListener("DOMContentLoaded", function () {
+    let form = document.getElementById("form-entrenamiento");
+    let botonGuardar = document.querySelector("#form-entrenamiento button");
+    let id_usuario = parseInt(localStorage.getItem("id_usuario"), 10);
+
+    cargarEntrenamientos(); // Cargar los entrenamientos al iniciar la página
+
+    // Evento del formulario para registrar o actualizar entrenamiento
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        let entrenamiento = {
+            id_usuario: id_usuario, 
+            fecha: document.getElementById("fecha").value,
+            tipo_ejercicio: document.getElementById("tipo_ejercicio").value,
+            repeticiones: document.getElementById("repeticiones").value,
+            series: document.getElementById("series").value,
+            peso: document.getElementById("peso").value,
+            tiempo: document.getElementById("tiempo").value,
+            notas: document.getElementById("notas").value
+        };
+
+        if (idEditando) {
+            // Si estamos editando, actualizamos el entrenamiento
+            fetch(`http://localhost:3000/entrenamientos/${idEditando}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(entrenamiento)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Entrenamiento actualizado correctamente");
+                    resetearFormulario();
+                    cargarEntrenamientos();
+                } else {
+                    alert("Error al actualizar entrenamiento");
+                }
+            })
+            .catch(error => console.error("Error en la petición:", error));
+        } else {
+            // Si NO estamos editando, registramos un nuevo entrenamiento
+            fetch("http://localhost:3000/entrenamientos", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(entrenamiento)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Entrenamiento registrado correctamente");
+                    resetearFormulario();
+                    cargarEntrenamientos();
+                } else {
+                    alert("Error al registrar entrenamiento");
+                }
+            })
+            .catch(error => console.error("Error en la petición:", error));
+        }
+    });
+});
+
+    // FUNCIÓN PARA CARGAR ENTRENAMIENTOS
+    function cargarEntrenamientos() {
+      let id_usuario = parseInt(localStorage.getItem("id_usuario"), 10);
+      fetch(`http://localhost:3000/entrenamientos/${id_usuario}`)
+      .then(response => response.json())
+      .then(data => {
+        let tbody = document.querySelector(".lista-entrenamientos tbody");
+        tbody.innerHTML = ""; // Limpiar la tabla antes de agregar nuevos datos
+
+        if (data.success && data.entrenamientos.length > 0) {
+            data.entrenamientos.forEach(entrenamiento => {
+                let row = `<tr data-id="${entrenamiento.id_entrenamiento}">
+                    <td>${entrenamiento.fecha}</td>
+                    <td>${entrenamiento.tipo_ejercicio}</td>
+                    <td>${entrenamiento.repeticiones}</td>
+                    <td>${entrenamiento.series}</td>
+                    <td>${entrenamiento.peso}</td>
+                    <td>${entrenamiento.tiempo}</td>
+                    <td>${entrenamiento.notas}</td>
+                    <td>
+                        <button class="edit-btn" data-id="${entrenamiento.id_entrenamiento}">Editar</button>
+                        <button class="delete-btn" data-id="${entrenamiento.id_entrenamiento}">Eliminar</button>
+                    </td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+
+            // Asignar eventos a los botones de edición y eliminación
+            document.querySelectorAll(".edit-btn").forEach(button => {
+                button.addEventListener("click", function () {
+                    editarEntrenamiento(this.dataset.id);
+                });
+            });
+
+            document.querySelectorAll(".delete-btn").forEach(button => {
+                button.addEventListener("click", function () {
+                    eliminarEntrenamiento(this.dataset.id);
+                });
+            });
+        } else {
+            tbody.innerHTML = `<tr><td colspan="8">No hay entrenamientos registrados.</td></tr>`;
+        }
+    })
+    .catch(error => console.error("Error al obtener los entrenamientos:", error));
+   }
+
+    // FUNCIÓN PARA EDITAR ENTRENAMIENTO
+    function editarEntrenamiento(id) {
+      console.log("Editando entrenamiento con ID:", id); // <-- Para verificar si el ID llega bien
+
+      fetch(`http://localhost:3000/entrenamiento/${id}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+            let entrenamiento = data.entrenamiento;
+
+            // Llenar el formulario con los datos actuales
+            document.getElementById("fecha").value = entrenamiento.fecha;
+            document.getElementById("tipo_ejercicio").value = entrenamiento.tipo_ejercicio;
+            document.getElementById("repeticiones").value = entrenamiento.repeticiones;
+            document.getElementById("series").value = entrenamiento.series;
+            document.getElementById("peso").value = entrenamiento.peso;
+            document.getElementById("tiempo").value = entrenamiento.tiempo;
+            document.getElementById("notas").value = entrenamiento.notas;
+
+            // Guardar el ID del entrenamiento en la variable global
+            idEditando = id;
+
+            // Cambiar el botón "Guardar" a "Actualizar"
+            let botonGuardar = document.querySelector("#form-entrenamiento button");
+            botonGuardar.innerText = "Actualizar Entrenamiento";
+        } else {
+            alert("Error al cargar los datos del entrenamiento para editar.");
+        }
+      })
+    .catch(error => console.error("Error en la petición:", error));
+   }
+
+    // FUNCIÓN PARA ELIMINAR ENTRENAMIENTO
+    function eliminarEntrenamiento(id) {
+      if (confirm("¿Seguro que deseas eliminar este entrenamiento?")) {
+        fetch(`http://localhost:3000/entrenamientos/${id}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                cargarEntrenamientos();
+            } else {
+                alert("Error al eliminar el entrenamiento.");
+            }
+        })
+        .catch(error => console.error("Error en la petición:", error));
+    }
+  }
+
+    // FUNCIÓN PARA RESETEAR EL FORMULARIO
+    function resetearFormulario() {
+      document.getElementById("form-entrenamiento").reset();
+      document.querySelector("#form-entrenamiento button").innerText = "Guardar Entrenamiento";
+      idEditando = null; // Restablecer el modo de edición
+    }
+
+    // FUNCIÓN PARA CERRAR SESIÓN
+    function logout() {
+      localStorage.clear();
+      window.location.href = "index.html";
+    }
+
+    </script>
+</body>
+</html>

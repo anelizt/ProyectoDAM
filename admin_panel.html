@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="diario_entrenamiento.css">
+</head>
+<body>
+
+    <header>
+        <h1>Panel de Administración</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="index.html">Cerrar Sesión</a>
+        </nav>
+    </header>
+
+    <section class="lista-usuarios">
+        <h2>Gestión de Usuarios</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th>Fecha de Registro</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se listarán los usuarios -->
+                <tr>
+                    <td>1</td>
+                    <td>Admin Principal</td>
+                    <td>admin@zombieescape.com</td>
+                    <td>Administrador</td>
+                    <td>2024-02-10</td>
+                    <td>
+                        <button class="edit-btn">Editar</button>
+                        <button class="delete-btn">Eliminar</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Carlos Pérez</td>
+                    <td>carlos.perez@email.com</td>
+                    <td>Usuario</td>
+                    <td>2024-02-11</td>
+                    <td>
+                        <button class="edit-btn">Editar</button>
+                        <button class="delete-btn">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <script>
+      //FUNCIÓN PARA CARGAR USUARIOS
+      document.addEventListener("DOMContentLoaded", function() {
+      fetch("http://localhost:3000/usuarios")
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+            let tbody = document.querySelector(".lista-usuarios tbody");
+            tbody.innerHTML = "";
+            data.usuarios.forEach(usuario => {
+                let row = `<tr>
+                    <td>${usuario.id_usuario}</td>
+                    <td>${usuario.nombre}</td>
+                    <td>${usuario.email}</td>
+                    <td>${usuario.rol}</td>
+                    <td>${usuario.fecha_registro}</td>
+                    <td>
+                        <button class="edit-btn" data-id="${usuario.id_usuario}">Editar</button>
+                        <button class="delete-btn" data-id="${usuario.id_usuario}">Eliminar</button>
+                    </td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+        }
+      });
+     });
+
+      //FUNCIÓN PARA EDITAR 
+      document.addEventListener("DOMContentLoaded", function () {
+      // Evento de delegación para capturar clics en botones de edición
+      document.querySelector(".lista-usuarios tbody").addEventListener("click", function (event) {
+        if (event.target.classList.contains("edit-btn")) {
+            const userId = event.target.getAttribute("data-id");
+            const row = event.target.closest("tr");
+
+            // Obtener los valores actuales de la fila
+            const nombre = row.children[1].innerText;
+            const email = row.children[2].innerText;
+            const rol = row.children[3].innerText;
+
+            // Crear formulario emergente
+            const nuevoNombre = prompt("Editar nombre:", nombre);
+            const nuevoEmail = prompt("Editar email:", email);
+            const nuevoRol = prompt("Editar rol:", rol);
+
+            if (nuevoNombre && nuevoEmail && nuevoRol) {
+                fetch(`http://localhost:3000/usuarios/${userId}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ nombre: nuevoNombre, email: nuevoEmail, rol: nuevoRol })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    fetchUsuarios(); // Recargar la lista de usuarios
+                });
+            }
+            }
+         });
+        });
+
+      // Función para cargar usuarios nuevamente
+      function fetchUsuarios() {
+        fetch("http://localhost:3000/usuarios")
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            let tbody = document.querySelector(".lista-usuarios tbody");
+            tbody.innerHTML = "";
+            data.usuarios.forEach(usuario => {
+                let row = `<tr>
+                    <td>${usuario.id_usuario}</td>
+                    <td>${usuario.nombre}</td>
+                    <td>${usuario.email}</td>
+                    <td>${usuario.rol}</td>
+                    <td>${usuario.fecha_registro}</td>
+                    <td>
+                        <button class="edit-btn" data-id="${usuario.id_usuario}">Editar</button>
+                        <button class="delete-btn" data-id="${usuario.id_usuario}">Eliminar</button>
+                    </td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+          }
+        });
+       }
+
+      //FUNCIÓN PARA ELIMINAR USUARIO
+      document.addEventListener("DOMContentLoaded", function () {
+        fetchUsuarios();
+
+        // Evento de delegación para capturar clics en botones de eliminación
+        document.querySelector(".lista-usuarios tbody").addEventListener("click", function (event) {
+          if (event.target.classList.contains("delete-btn")) {
+            const userId = event.target.getAttribute("data-id");
+              if (confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
+                fetch(`http://localhost:3000/usuarios/${userId}`, {
+                    method: "DELETE"
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    fetchUsuarios(); // Recargar la lista de usuarios
+                });
+              }
+          }
+        });
+      });
+
+    </script>
+
+</body>
+</html>

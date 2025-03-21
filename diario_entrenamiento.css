@@ -1,0 +1,143 @@
+/* --- ESTILOS GENERALES --- */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #48a259;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* --- ENCABEZADO Y NAVEGACIÓN --- */
+header {
+    background: #f3b733;
+    color: black;
+    padding: 15px;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    color: black;
+    text-decoration: none;
+    margin: 10px;
+    font-size: 18px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* --- SECCIONES GENERALES --- */
+section {
+    background: #333333;
+    margin: 20px auto;
+    padding: 50px;
+    width: 90%;
+    max-width: 800px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    color: #eeeeee;
+}
+
+h2 {
+    color: #eeeeee;
+}
+
+/* --- FORMULARIO DE REGISTRO DE ENTRENAMIENTO --- */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    text-align: left;
+    font-weight: bold;
+}
+
+input, textarea, button {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+}
+
+textarea {
+    resize: vertical;
+}
+
+button {
+    background-color: #ff0000;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    border: #ff0000;
+}
+
+button:hover {
+    background-color: #6b8772;
+}
+
+/* --- TABLA DE ENTRENAMIENTOS --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #6b8772;
+    color: white;
+}
+
+/* --- BOTONES DE ACCIÓN --- */
+.edit-btn {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.edit-btn:hover {
+    background-color: #6b8772;
+}
+
+.delete-btn {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.delete-btn:hover {
+    background-color: #6b8772;
+}
+
+/* ---- PAGINA DESTINO DROPDOWN ---- */
+ul {
+    list-style-type: disc; /* Opcional: Puedes cambiarlo según tu diseño */
+    padding-left: 20px; /* Ajusta el margen izquierdo de la lista */
+    margin-top: 5px; /* Espacio entre el título y la lista */
+}
+
+ul li {
+    text-align: left; /* Asegura que el texto de los ítems esté alineado a la izquierda */
+    display: block; /* Asegura que los elementos estén en una nueva línea */
+    margin-bottom: 5px; /* Espacio entre elementos de la lista */
+}
+
+
