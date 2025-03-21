@@ -2,7 +2,7 @@
 
 Proyecto final para el ciclo formativo de **Desarrollo de Aplicaciones Multiplataforma (DAM)**.
 
-Este proyecto es una simulación interactiva de entrenamiento para escapar de un apocalipsis zombie. Fue desarrollado como parte del módulo de Proyecto de Aplicaciones Multiplataforma.
+Este proyecto es una simulación interactiva de entrenamiento para escapar de un apocalipsis zombie. Fue desarrollado como parte del módulo de Proyecto de Desarrollo de Aplicaciones Multiplataforma.
 
 ---
 
