@@ -6,7 +6,7 @@ Este proyecto es una simulación interactiva de entrenamiento para escapar de un
 
 ---
 
-## 🚀 ¿Cómo ejecutarlo?
+## ¿Cómo ejecutarlo?
 
 1. Clona el repositorio:
    ```bash
@@ -14,16 +14,19 @@ Este proyecto es una simulación interactiva de entrenamiento para escapar de un
 2. Ábrelo en tu IDE favorito.
 3. Ejecuta el archivo principal.
 
-## 📸 Capturas
+## Capturas
 ![image](https://github.com/user-attachments/assets/bb165b40-7ca4-4c72-b235-31e54083910e)
 
 ![image](https://github.com/user-attachments/assets/8858bb67-a2bb-4c6f-bed8-42e6162df513)
 
 ![image](https://github.com/user-attachments/assets/82ee09ac-360d-45ca-b190-accde3040a21)
 
+![image](https://github.com/user-attachments/assets/ea07cde6-4c61-4deb-b557-7c8064e6a8ce)
 
 
-## 🛠️ Tecnologías usadas
+
+
+## Tecnologías usadas
 
 - Html5
 - CSS3
@@ -33,11 +36,11 @@ Este proyecto es una simulación interactiva de entrenamiento para escapar de un
 - CORS
 - MySQL
 
-## 👤 Autor
+## Autor
 
 - https://github.com/S1371582
 
-## 📄 Licencia
+## Licencia
 
 Este proyecto está bajo la licencia MIT. Ver el archivo `LICENSE` para más información.
 
