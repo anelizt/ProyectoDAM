@@ -15,6 +15,7 @@ Este proyecto es una simulación interactiva de entrenamiento para escapar de un
 3. Ejecuta el archivo principal.
 
 ## Capturas
+
 ![image](https://github.com/user-attachments/assets/bb165b40-7ca4-4c72-b235-31e54083910e)
 
 ![image](https://github.com/user-attachments/assets/8858bb67-a2bb-4c6f-bed8-42e6162df513)
@@ -23,8 +24,11 @@ Este proyecto es una simulación interactiva de entrenamiento para escapar de un
 
 ![image](https://github.com/user-attachments/assets/ea07cde6-4c61-4deb-b557-7c8064e6a8ce)
 
+## Demo visual
 
+Esta es una demo visual. El registro no está activo en esta versión porque el backend requiere un servidor externo.
 
+https://zombieescapetraining.netlify.app/
 
 ## Tecnologías usadas
 
