@@ -26,7 +26,7 @@ Este proyecto es una simulación interactiva de entrenamiento para escapar de un
 
 ## Demo visual
 
-Esta es una demo visual. El registro no está activo en esta versión porque el backend requiere un servidor externo.
+Esta es una demo visual. El registro no está activo en esta versión porque el backend requiere de un servidor externo.
 
 https://zombieescapetraining.netlify.app/
 
