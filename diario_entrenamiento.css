@@ -127,17 +127,46 @@ th {
     background-color: #6b8772;
 }
 
-/* ---- PAGINA DESTINO DROPDOWN ---- */
+/* ---- destino_dropdaown.html ---- */
 ul {
-    list-style-type: disc; /* Opcional: Puedes cambiarlo según tu diseño */
-    padding-left: 20px; /* Ajusta el margen izquierdo de la lista */
-    margin-top: 5px; /* Espacio entre el título y la lista */
+    list-style-type: disc; 
+    padding-left: 20px; 
+    margin-top: 5px; 
 }
 
 ul li {
-    text-align: left; /* Asegura que el texto de los ítems esté alineado a la izquierda */
-    display: block; /* Asegura que los elementos estén en una nueva línea */
-    margin-bottom: 5px; /* Espacio entre elementos de la lista */
+    text-align: left; 
+    display: block; 
+    margin-bottom: 5px; 
 }
 
+/*GALERÍA DE CAPTURAS DE MINECRAFT (destino_dropdown.html)*/
 
+.galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .galeria a {
+    display: block;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+  }
+  
+  .galeria img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .galeria a:hover {
+    transform: scale(1.03);
+  }
+  
