@@ -30,6 +30,12 @@ Esta es una demo visual. El registro no está activo en esta versión porque el 
 
 https://zombieescapetraining.netlify.app/
 
+## 🎮 Simulacro en Minecraft
+
+[![Ver simulacro](assets/captura1.png)](assets/cricuito_maincraft-VEED.mp4)
+
+Haz clic en la imagen para ver el video del circuito.
+
 ## Tecnologías usadas
 
 - Html5
