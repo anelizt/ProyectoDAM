@@ -30,11 +30,7 @@ Esta es una demo visual. El registro no está activo en esta versión porque el 
 
 https://zombieescapetraining.netlify.app/
 
-## 🎮 Simulacro del Zombie Weekend Challenge
-
-📸 ![Captura del simulacro](assets/captura1.png)
-
-👉 [Haz clic aquí para ver el video del simulacro (MP4)](assets/cricuito_maincraft-VEED.mp4)
+¡No te pierdas el simulacro del Zombie Weekend Challenge en Minecraft!
 
 ## Tecnologías usadas
 
