@@ -5,6 +5,7 @@
             background-color: #48a259;
             color: #000;
         }
+
         .header {
             display: flex;
             justify-content: space-between;
@@ -16,13 +17,12 @@
             position: relative;
             display: flex;
         }
-        /* Contenedor principal */
+        
         .nav-item {
             position: relative;
             display: inline-block;
         }
 
-        /* Enlace principal */
         .nav-item > a {
             text-decoration: none;
             color: black;
@@ -31,7 +31,6 @@
             display: inline-block;
         }
 
-        /* Estilo del dropdown (oculto por defecto) */
         .dropdown {
             position: absolute;
             top: 100%;
@@ -44,7 +43,6 @@
             min-width: 600px; 
         }
 
-        /* Opciones dentro del dropdown */
         .dropdown a {
            padding: 10px;
            text-decoration: none;
@@ -53,12 +51,10 @@
            transition: background-color 0.3s ease;
         }
 
-        /* Efecto hover en las opciones */
         .dropdown a:hover {
            background-color: #48a259;
         }
 
-        /* Mostrar el dropdown cuando se pasa el ratón */
         .nav-item:hover .dropdown {
            display: flex;
         }
@@ -69,17 +65,21 @@
             align-items: center;
             padding: 100px 50px;
         }
+
         .hero-text {
             max-width: 500px;
         }
+
         .hero-text h1 {
             font-size: 2em;
             font-weight: bold;
         }
+
         .hero-text p {
             font-size: 1.2em;
             margin: 20px 0;
         }
+
         .btn {
             background-color: black;
             color: white;
@@ -89,6 +89,7 @@
             cursor: pointer;
             border-radius: 5px;
         }
+        
         .product img {
             max-width: 700px; 
         }
@@ -129,26 +130,13 @@
                 width: 100%;
             }
         
-            /*.dropdown {
+            .dropdown {
                 position: static;
                 min-width: unset;
                 width: 100%;
                 box-shadow: none;
-            }*/
-
-            .dropdown {
-                position: absolute;
-                right: 0;
-                left: auto;
-                width: auto;
-                min-width: unset;
-                background-color: #ffeaa7;
-                padding: 5px 10px;
-                flex-direction: column;
-                box-shadow: none;
             }
-            
-        
+
             .hero {
                 flex-direction: column;
                 padding: 50px 20px;
@@ -180,7 +168,7 @@
             }
             
             .dropdown a {
-                padding-left: 20px; /* Indentación para que se vea jerárquico */
+                padding-left: 20px; 
                 font-weight: normal;
                 border-bottom: 1px solid #ccc;
             }
