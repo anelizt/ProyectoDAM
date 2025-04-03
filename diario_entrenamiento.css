@@ -172,8 +172,8 @@ ul li {
 
   @media screen and (max-width: 768px) {
     header {
-        /*padding: 10px;*/
-        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     h1 {
