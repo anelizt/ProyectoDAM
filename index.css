@@ -113,9 +113,12 @@
             margin-left: 200px;
         }
 
+        .menu-toggle {
+            display: none;
+        }
         
         @media screen and (max-width: 768px) {
-            .header {
+           /* .header {
                 flex-direction: column;
                 align-items: flex-start;
                 padding: 10px 20px;
@@ -171,7 +174,7 @@
                 padding-left: 20px; 
                 font-weight: normal;
                 border-bottom: 1px solid #ccc;
-            }
+            }*/
 
             .menu-toggle {
                 display: block;
@@ -183,10 +186,10 @@
             }
             
             .header nav {
-                display: none; /* ocultamos el menú por defecto en móvil */
+                display: none;
                 flex-direction: column;
                 width: 100%;
-                margin-top: 50px;
+                margin-top: 20px;
             }
             
             .header nav.active {
@@ -197,6 +200,43 @@
                 width: 100%;
             }
             
+            .dropdown {
+                position: static;
+                width: 100%;
+                background-color: #ffeaa7;
+                flex-direction: column;
+                padding: 5px 10px;
+                box-shadow: none;
+            }
+            
+            .nav-item > a {
+                background-color: #f3b733;
+                font-weight: bold;
+                border-bottom: 2px solid #ddd;
+            }
+            
+            .dropdown a {
+                padding-left: 20px;
+                font-weight: normal;
+                border-bottom: 1px solid #ccc;
+            }
+            
+            .hero {
+                flex-direction: column;
+                padding: 50px 20px;
+                text-align: center;
+            }
+            
+            .product {
+                margin-top: 30px;
+            }
+            
+            .product img {
+                max-width: 100%;
+                height: auto;
+            }
+            
+
             
         }
         

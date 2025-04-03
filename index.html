@@ -10,6 +10,7 @@
 <body>
     <header class="header">
         <div><strong>Zombie</strong>EscapeTraining</div>
+        <div class="menu-toggle">&#9776;</div>
         <nav>
             <div class="nav-item">
                 <a>Entrenamientos</a>
@@ -44,7 +45,6 @@
                 </div>
             </div>
         </nav>
-        <div class="menu-toggle">&#9776;</div>
     </header>
     <section class="hero">
         <div class="hero-text">
@@ -58,10 +58,13 @@
             <img src="assets/Zombie_Escape_Trainning_Journal_2.jpg" alt="Diario de entrenamiento">
         </div>
     </section>
-
+        
     <script>
-        document.querySelector('.menu-toggle').addEventListener('click', function () {
-            document.querySelector('.header nav').classList.toggle('active');
+        const toggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('.header nav');
+    
+        toggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
         });
     </script>
     
