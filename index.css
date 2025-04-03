@@ -154,7 +154,7 @@
             .dropdown {
                 position: static;
                 width: 100%;
-                background-color: grey;
+                background-color: rgb(163, 161, 161);
                 flex-direction: column;
                 padding: 5px 10px;
                 box-shadow: none;
@@ -163,13 +163,13 @@
             .nav-item > a {
                 background-color: #f3b733;
                 font-weight: bold;
-                border-bottom: 2px solid black;
+                border-bottom: 2px solid rgb(181, 179, 179);
             }
             
             .dropdown a {
                 padding-left: 20px;
                 font-weight: normal;
-                border-bottom: 1px solid black;
+                border-bottom: 1px solid #f3b733;
             }
             
             .hero {
