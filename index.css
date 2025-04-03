@@ -158,12 +158,12 @@
             .nav-item > a {
                 background-color: #f3b733; /* Para resaltar el título */
                 font-weight: bold;
-                border-bottom: 2px solid #ddd;
+                border-bottom: 2px solid #48a259;
             }
             
             .dropdown {
                 padding: 5px 10px;
-                background-color: #ffeaa7; /* Más suave que el amarillo fuerte */
+                background-color: #7ae090; /* Más suave que el amarillo fuerte */
             }
             
             .dropdown a {
