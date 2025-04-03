@@ -129,12 +129,25 @@
                 width: 100%;
             }
         
-            .dropdown {
+            /*.dropdown {
                 position: static;
                 min-width: unset;
                 width: 100%;
                 box-shadow: none;
+            }*/
+
+            .dropdown {
+                position: absolute;
+                right: 0;
+                left: auto;
+                width: auto;
+                min-width: unset;
+                background-color: #ffeaa7;
+                padding: 5px 10px;
+                flex-direction: column;
+                box-shadow: none;
             }
+            
         
             .hero {
                 flex-direction: column;
@@ -156,14 +169,14 @@
             }
 
             .nav-item > a {
-                background-color: #f3b733; /* Para resaltar el título */
+                background-color: #f3b733;
                 font-weight: bold;
-                border-bottom: 2px solid #48a259;
+                border-bottom: 2px solid #070707;
             }
             
             .dropdown {
                 padding: 5px 10px;
-                background-color: #7ae090; /* Más suave que el amarillo fuerte */
+                background-color: grey; 
             }
             
             .dropdown a {
