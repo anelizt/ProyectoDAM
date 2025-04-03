@@ -89,7 +89,7 @@
             cursor: pointer;
             border-radius: 5px;
         }
-        
+
         .product img {
             max-width: 700px; 
         }
@@ -172,6 +172,31 @@
                 font-weight: normal;
                 border-bottom: 1px solid #ccc;
             }
+
+            .menu-toggle {
+                display: block;
+                font-size: 28px;
+                cursor: pointer;
+                position: absolute;
+                right: 20px;
+                top: 15px;
+            }
+            
+            .header nav {
+                display: none; /* ocultamos el menú por defecto en móvil */
+                flex-direction: column;
+                width: 100%;
+                margin-top: 50px;
+            }
+            
+            .header nav.active {
+                display: flex;
+            }
+            
+            .nav-item {
+                width: 100%;
+            }
+            
             
         }
         
