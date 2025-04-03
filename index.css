@@ -118,73 +118,24 @@
         }
         
         @media screen and (max-width: 768px) {
-           /* .header {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 10px 20px;
-            }
-        
-            .header nav {
-                flex-direction: column;
-                width: 100%;
-            }
-        
-            .nav-item {
-                width: 100%;
-            }
-        
-            .dropdown {
-                position: static;
-                min-width: unset;
-                width: 100%;
-                box-shadow: none;
-            }
-
-            .hero {
-                flex-direction: column;
-                padding: 50px 20px;
-                text-align: center;
-            }
-        
-            .hero-text {
-                max-width: 100%;
-            }
-        
-            .product img {
-                max-width: 100%;
-                height: auto;
-            }
-
-            .product {
-                margin-top: 30px; 
-            }
-
-            .nav-item > a {
-                background-color: #f3b733;
-                font-weight: bold;
-                border-bottom: 2px solid #070707;
-            }
-            
-            .dropdown {
-                padding: 5px 10px;
-                background-color: grey; 
-            }
-            
-            .dropdown a {
-                padding-left: 20px; 
-                font-weight: normal;
-                border-bottom: 1px solid #ccc;
-            }*/
-
+           
             .menu-toggle {
                 display: block;
                 font-size: 28px;
                 cursor: pointer;
                 position: absolute;
                 right: 20px;
-                top: 15px;
+                top: 20px;
             }
-            
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px;
+                position: relative;
+                min-height: 70px; 
+            }
+                        
             .header nav {
                 display: none;
                 flex-direction: column;
