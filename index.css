@@ -154,6 +154,24 @@
             .product {
                 margin-top: 30px; 
             }
+
+            .nav-item > a {
+                background-color: #f3b733; /* Para resaltar el título */
+                font-weight: bold;
+                border-bottom: 2px solid #ddd;
+            }
+            
+            .dropdown {
+                padding: 5px 10px;
+                background-color: #ffeaa7; /* Más suave que el amarillo fuerte */
+            }
+            
+            .dropdown a {
+                padding-left: 20px; /* Indentación para que se vea jerárquico */
+                font-weight: normal;
+                border-bottom: 1px solid #ccc;
+            }
+            
         }
         
        
