@@ -8,10 +8,18 @@ body {
 }
 
 /* --- ENCABEZADO Y NAVEGACIÓN --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 header {
     background: #f3b733;
     color: black;
     padding: 15px;
+    width: 100%;
+    background-color: #f3b733;
 }
 
 nav {
