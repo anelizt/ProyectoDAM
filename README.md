@@ -42,9 +42,11 @@ https://zombieescapetraining.netlify.app/
 - CORS
 - MySQL
 
-## Autor
+## Autores
 
 - https://github.com/S1371582
+- https://github.com/anelizt
+- https://github.com/JMGP1988
 
 ## Licencia
 
