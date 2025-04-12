@@ -161,22 +161,22 @@
                     <td>${entrenamiento.peso}</td>
                     <td>${entrenamiento.tiempo}</td>
                     <td><div class="nota-wrap">${entrenamiento.notas}</div></td>
-                    <td>
-                        <button class="edit-btn" data-id="${entrenamiento.id_entrenamiento}">Editar</button>
-                        <button class="delete-btn" data-id="${entrenamiento.id_entrenamiento}">Eliminar</button>
+                    <td class="acciones">
+                        <div class="edit-icon" data-id="${entrenamiento.id_entrenamiento}"></div>
+                        <div class="delete-icon" data-id="${entrenamiento.id_entrenamiento}"></div>
                     </td>
                 </tr>`;
                 tbody.innerHTML += row;
             });
 
             // Asignar eventos a los botones de edición y eliminación
-            document.querySelectorAll(".edit-btn").forEach(button => {
+            document.querySelectorAll(".edit-icon").forEach(button => {
                 button.addEventListener("click", function () {
                     editarEntrenamiento(this.dataset.id);
                 });
             });
 
-            document.querySelectorAll(".delete-btn").forEach(button => {
+            document.querySelectorAll(".delete-icon").forEach(button => {
                 button.addEventListener("click", function () {
                     eliminarEntrenamiento(this.dataset.id);
                 });
