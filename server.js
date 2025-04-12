@@ -95,7 +95,7 @@ app.put('/entrenamientos/:id', (req, res) => {
 
 // OBTENER ENTRENAMIENTOS DE UN USUARIO
 app.get('/entrenamientos/:id_usuario', (req, res) => {
-    const sql = 'SELECT * FROM entrenamientos WHERE id_usuario = ?';
+    const sql = 'SELECT *, DATE_FORMAT(fecha, "%d/%m/%Y") AS fecha FROM entrenamientos WHERE id_usuario = ?';
     db.query(sql, [req.params.id_usuario], (err, results) => {
         if (err) return res.status(500).json({ success: false, message: 'Error en el servidor' });
         res.json({ success: true, entrenamientos: results });
