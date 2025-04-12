@@ -1,0 +1,13 @@
+.zombi-btn {
+    display: inline-block;
+    width: 64px; 
+    height: 64px;
+    background-image: url('assets/boton_volver_cerrada.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: background-image 0.2s ease-in-out;
+}
+
+.zombi-btn:hover {
+    background-image: url('assets/boton_volver_abierta.png');
+}

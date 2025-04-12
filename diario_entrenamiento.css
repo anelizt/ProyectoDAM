@@ -29,12 +29,26 @@ nav {
 nav a {
     color: black;
     text-decoration: none;
-    margin: 10px;
     font-size: 18px;
 }
 
 nav a:hover {
     text-decoration: underline;
+}
+
+.zombi-btn {
+    display: inline-block;
+    width: 120px; 
+    height: 120px;
+    margin-bottom: -20px;
+    background-image: url('assets/boton_volver_cerrada.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: background-image 0.2s ease-in-out;
+}
+
+.zombi-btn:hover {
+    background-image: url('assets/boton_volver_abierta.png');
 }
 
 /* --- SECCIONES GENERALES --- */
