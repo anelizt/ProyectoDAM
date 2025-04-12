@@ -101,11 +101,19 @@ th, td {
     padding: 10px;
     text-align: center;
     white-space: normal;
+    min-height: 100px;
 }
 
 th {
     background-color: #6b8772;
     color: white;
+}
+
+td.acciones { 
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0
 }
 
 /* limitar ancho para evitar que expanda la tabla en notas */
@@ -121,31 +129,38 @@ th {
 
 
 /* --- BOTONES DE ACCIÓN --- */
-.edit-btn {
-    background-color: #ff0000;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    margin-bottom: 10px;
+
+.delete-icon {
+    width:40px;
+    height: 40px;
     cursor: pointer;
-    font-weight: bold;
-}
-
-.edit-btn:hover {
-    background-color: #6b8772;
-}
-
-.delete-btn {
-    background-color: #ff0000;
-    color: white;
+    background-image: url('assets/boton_eliminar_cerrado.png');
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: center;
     border: none;
-    padding: 5px 10px;
+    display: inline-block;
     cursor: pointer;
-    font-weight: bold;
+}
+.edit-icon {
+    width:36px;
+    height: 36px;
+    cursor: pointer;
+    background-image: url('assets/boton_editar_off.png');
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    display: inline-block;
+    cursor: pointer;
 }
 
-.delete-btn:hover {
-    background-color: #6b8772;
+/* Cambia la imagen al hacer hover */
+.delete-icon:hover {
+    background-image: url('assets/boton_eliminar_abierto.png');
+}
+.edit-icon:hover {
+    background-image: url('assets/boton_editar_on.png');
 }
 
 /* ---- destino_dropdaown.html ---- */
