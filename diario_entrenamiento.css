@@ -100,12 +100,25 @@ th, td {
     border: 1px solid #ddd;
     padding: 10px;
     text-align: center;
+    white-space: normal;
 }
 
 th {
     background-color: #6b8772;
     color: white;
 }
+
+/* limitar ancho para evitar que expanda la tabla en notas */
+.nota-wrap {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    display: block;
+    text-align: left;
+}
+
+
 
 /* --- BOTONES DE ACCIÓN --- */
 .edit-btn {
