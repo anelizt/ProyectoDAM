@@ -199,7 +199,16 @@
             let entrenamiento = data.entrenamiento;
 
             // Llenar el formulario con los datos actuales
-            document.getElementById("fecha").value = entrenamiento.fecha;
+            function formatearFechaLocal(fechaString) {
+                const fecha = new Date(fechaString);
+                const year = fecha.getFullYear();
+                const month = String(fecha.getMonth() + 1).padStart(2, '0');
+                const day = String(fecha.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            }
+
+            const fechaFormateada = formatearFechaLocal(entrenamiento.fecha); // Para la fecha sea recuperada al editar entreno
+            document.getElementById("fecha").value = fechaFormateada;
             document.getElementById("tipo_ejercicio").value = entrenamiento.tipo_ejercicio;
             document.getElementById("repeticiones").value = entrenamiento.repeticiones;
             document.getElementById("series").value = entrenamiento.series;
@@ -222,22 +231,26 @@
 
     // FUNCIÓN PARA ELIMINAR ENTRENAMIENTO
     function eliminarEntrenamiento(id) {
-      if (confirm("¿Seguro que deseas eliminar este entrenamiento?")) {
-        fetch(`http://localhost:3000/entrenamientos/${id}`, {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                cargarEntrenamientos();
-            } else {
-                alert("Error al eliminar el entrenamiento.");
-            }
-        })
-        .catch(error => console.error("Error en la petición:", error));
+        if (confirm("¿Seguro que deseas eliminar este entrenamiento?")) {
+            fetch(`http://localhost:3000/entrenamientos/${id}`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Resetea formulario en caso de eliminar justo el que se edita
+                    if (idEditando && idEditando == id) {
+                        resetearFormulario();
+                    }
+                    cargarEntrenamientos();
+                } else {
+                    alert("Error al eliminar el entrenamiento.");
+                }
+            })
+            .catch(error => console.error("Error en la petición:", error));
+        }
     }
-  }
 
     // FUNCIÓN PARA RESETEAR EL FORMULARIO
     function resetearFormulario() {
