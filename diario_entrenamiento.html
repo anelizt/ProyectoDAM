@@ -85,19 +85,20 @@
 
     <script>
     let idEditando = null;  
+    let contadorEjercicio;
+    let contadorNotas;
+    const maxEjercicio = 40;
+    const maxNotas = 120;
     document.addEventListener("DOMContentLoaded", function () {
     let form = document.getElementById("form-entrenamiento");
     let botonGuardar = document.querySelector("#form-entrenamiento button");
     let id_usuario = parseInt(localStorage.getItem("id_usuario"), 10);
     // Muestra los carac. restantes que quedan en lso campos notas y ejercicio
     const ejercicioInput = document.getElementById("tipo_ejercicio");
-    const contadorEjercicio = document.getElementById("contador-ejercicio");
+    contadorEjercicio = document.getElementById("contador-ejercicio");
 
     const notasInput = document.getElementById("notas");
-    const contadorNotas = document.getElementById("contador-notas");
-
-    const maxEjercicio = 40;
-    const maxNotas = 120;
+    contadorNotas = document.getElementById("contador-notas");
 
     contadorEjercicio.innerText = `${maxEjercicio}`;
     contadorNotas.innerText = `${maxNotas}`;
@@ -245,6 +246,11 @@
             document.getElementById("tiempo").value = entrenamiento.tiempo;
             document.getElementById("notas").value = entrenamiento.notas;
 
+            // Muestra el número restante de caracteres del campo tras cargar el contenido
+            contadorEjercicio.innerText = maxEjercicio - entrenamiento.tipo_ejercicio.length;
+            contadorNotas.innerText = maxNotas - entrenamiento.notas.length;
+
+
             // Guardar el ID del entrenamiento en la variable global
             idEditando = id;
 
@@ -286,7 +292,8 @@
         document.getElementById("form-entrenamiento").reset();
         document.querySelector("#form-entrenamiento button").innerText = "Guardar Entrenamiento";
         idEditando = null; // Restablecer el modo de edición
-
+        contadorEjercicio.innerText = `${maxEjercicio}`;
+        contadorNotas.innerText = `${maxNotas}`;
     }
 
     // FUNCIÓN PARA CERRAR SESIÓN
