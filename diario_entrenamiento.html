@@ -21,9 +21,11 @@
         <form id="form-entrenamiento">
             <label for="fecha">Fecha:</label>
             <input type="date" id="fecha" name="fecha" required>
-
-            <label for="tipo_ejercicio">Ejercicio:</label>
-            <input type="text" id="tipo_ejercicio" name="tipo_ejercicio" placeholder="Ejemplo: Press de banca" required>
+            <div class="input-con-contador">
+                <label for="tipo_ejercicio">Ejercicio:</label>
+                <input type="text" id="tipo_ejercicio" name="tipo_ejercicio" placeholder="Ejemplo: Press de banca" maxlength="40" required>
+                <span id="contador-ejercicio"></span>
+            </div>
 
             <label for="repeticiones">Repeticiones:</label>
             <input type="number" id="repeticiones" name="repeticiones" min="0" required>
@@ -37,8 +39,11 @@
             <label for="tiempo">Tiempo (min):</label>
             <input type="number" id="tiempo" name="tiempo" step="0.1">
 
-            <label for="notas">Notas:</label>
-            <textarea id="notas" name="notas" placeholder="Observaciones del entrenamiento"></textarea>
+            <div class="input-con-contador">
+                <label for="notas">Notas:</label>
+                <textarea id="notas" name="notas" placeholder="Observaciones del entrenamiento" maxlength="120"></textarea>
+                <span id="contador-notas"></span>
+            </div>
 
             <button type="submit">Guardar Entrenamiento</button>
         </form>
@@ -84,6 +89,30 @@
     let form = document.getElementById("form-entrenamiento");
     let botonGuardar = document.querySelector("#form-entrenamiento button");
     let id_usuario = parseInt(localStorage.getItem("id_usuario"), 10);
+    // Muestra los carac. restantes que quedan en lso campos notas y ejercicio
+    const ejercicioInput = document.getElementById("tipo_ejercicio");
+    const contadorEjercicio = document.getElementById("contador-ejercicio");
+
+    const notasInput = document.getElementById("notas");
+    const contadorNotas = document.getElementById("contador-notas");
+
+    const maxEjercicio = 40;
+    const maxNotas = 120;
+
+    contadorEjercicio.innerText = `${maxEjercicio}`;
+    contadorNotas.innerText = `${maxNotas}`;
+    
+    // Resta 1 por cada caracter escrito y actualiza el valor en el campo
+    ejercicioInput.addEventListener("input", () => {
+        const restantes = maxEjercicio - ejercicioInput.value.length;
+        contadorEjercicio.innerText = restantes;
+    });
+
+    notasInput.addEventListener("input", () => {
+        const restantes = maxNotas - notasInput.value.length;
+        contadorNotas.innerText = restantes;
+    });
+
 
     cargarEntrenamientos(); // Cargar los entrenamientos al iniciar la página
 
@@ -253,10 +282,11 @@
     }
 
     // FUNCIÓN PARA RESETEAR EL FORMULARIO
-    function resetearFormulario() {
-      document.getElementById("form-entrenamiento").reset();
-      document.querySelector("#form-entrenamiento button").innerText = "Guardar Entrenamiento";
-      idEditando = null; // Restablecer el modo de edición
+    function resetearFormulario() {  
+        document.getElementById("form-entrenamiento").reset();
+        document.querySelector("#form-entrenamiento button").innerText = "Guardar Entrenamiento";
+        idEditando = null; // Restablecer el modo de edición
+
     }
 
     // FUNCIÓN PARA CERRAR SESIÓN
