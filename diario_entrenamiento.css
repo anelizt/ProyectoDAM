@@ -103,6 +103,27 @@ button:hover {
     background-color: #6b8772;
 }
 
+/* --- CONTADOR CARACTERES NOTAS Y EJERCICIO --- */
+.input-con-contador {
+    position: relative;
+    width: 100%;
+}
+
+.input-con-contador input {
+    padding-right: 40px; /* no borrar - deja espacio para el contador */
+}
+
+.input-con-contador span {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: 12px;
+    color: #888;
+    pointer-events: none;
+}
+
+
+
 /* --- TABLA DE ENTRENAMIENTOS --- */
 table {
     width: 100%;
