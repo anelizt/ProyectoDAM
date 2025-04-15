@@ -1,0 +1,176 @@
+body {
+  background-image: url('assets/landing.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  filter: brightness(1.2);
+}
+
+.back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: #5a1e1e;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  z-index: 1000;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  animation: shake 0.5s infinite, neonGlow 1.5s infinite, fadePulse 1s infinite;
+}
+
+.cardio-container {
+  max-width: 1200px;
+  margin: 120px auto 60px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.cardio-container .intro h1 {
+  font-family: 'Creepster', cursive;
+  font-size: 3rem;
+  color: #39ff14;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 2px black;
+}
+
+.cardio-container .intro p {
+  font-size: 1.2rem;
+  color: #ddd;
+  max-width: 700px;
+  margin: 0 auto 30px;
+}
+
+.grid-ejercicios {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  justify-items: center;
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 400px;
+  perspective: 1000px;
+  overflow: hidden;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+}
+
+.flip-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flip-card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.flip-card-back {
+  background-image: url('assets/cardiosupervivencia/cardback.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  backdrop-filter: brightness(0.6);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  box-sizing: border-box;
+  z-index: 2;
+  border-radius: 10px;
+}
+
+.flip-card-back h2 {
+  font-size: 1.8rem;
+  margin: 0 auto 20px auto;
+  color: #39ff14;
+  text-align: center;
+}
+
+.flip-card-back p {
+  font-size: 1.1rem;
+  margin: 0 auto 10px auto;
+  line-height: 1.6;
+  text-align: center;
+  max-width: 90%;
+}
+
+@media screen and (max-width: 768px) {
+  .grid-ejercicios {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .flip-card {
+    width: 90%;
+    height: 380px;
+  }
+
+  .back-button {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+
+  .cardio-container .intro h1 {
+    font-size: 2.2rem;
+  }
+}
+
+@keyframes shake {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(-3px); }
+  50%  { transform: translateX(3px); }
+  75%  { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes neonGlow {
+  0%   { text-shadow: 0 0 5px #fff, 0 0 10px red; }
+  50%  { text-shadow: 0 0 20px red, 0 0 30px red; }
+  100% { text-shadow: 0 0 5px #fff, 0 0 10px red; }
+}
+
+@keyframes fadePulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.6; }
+}
