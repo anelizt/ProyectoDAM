@@ -1,0 +1,55 @@
+.hidden-zombie {
+    position: absolute;
+    top: 10vh;
+    left: 5vw;
+    width: 120px;
+    height: 120px;
+    background-image: url("assets/zombie_sprite.png");
+    background-size: cover;
+    animation: zombieWander 12s infinite linear, zombieGlow 1.5s infinite ease-in-out;
+    z-index: 999;
+    filter: drop-shadow(0 0 20px red);
+}
+
+@keyframes zombieWander {
+  0% {
+    top: 10vh;
+    left: 5vw;
+    transform: translate(0, 0);
+  }
+  25% {
+    top: 60vh;
+    left: 20vw;
+    transform: translate(5px, -5px);
+  }
+  50% {
+    top: 30vh;
+    left: 70vw;
+    transform: translate(-5px, 5px);
+  }
+  75% {
+    top: 80vh;
+    left: 40vw;
+    transform: translate(10px, -10px);
+  }
+  100% {
+    top: 10vh;
+    left: 90vw;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes zombieGlow {
+    0% {
+        filter: drop-shadow(0 0 10px red);
+        transform: scale(1);
+    }
+    50% {
+        filter: drop-shadow(0 0 25px #ff0000);
+        transform: scale(1.05);
+    }
+    100% {
+        filter: drop-shadow(0 0 10px red);
+        transform: scale(1);
+    }
+}
