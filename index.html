@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZombieEscapeTraining</title>
+    <title>Zombie Escape Training</title>
     <link rel="icon" type="image/png" href="assets/zombi.png">
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <header class="header">
-        <div><strong>Zombie</strong>EscapeTraining</div>
+        <div>Zombie Escape Training</div>
         <div class="menu-toggle">&#9776;</div>
         <nav>
             <div class="nav-item">
@@ -46,29 +46,27 @@
             </div>
         </nav>
     </header>
+
     <section class="hero">
         <div class="hero-text">
             <h1>¡Corre, esquiva y sobrevive!</h1>
-            <p>Diario de entrenamiento</p>
+            <p>Diario de entrenamiento post-apocalíptico</p>
             <a href="Registro.html">
                <button class="btn">¡Pruébalo ya!</button>
             </a>
         </div>
-        <div class="product">
-            <img src="assets/Zombie_Escape_Trainning_Journal_2.jpg" alt="Diario de entrenamiento">
-        </div>
+
+        <!-- Zombie oculto que parpadea -->
+        <div class="hidden-zombie" title="¡Me has visto!"></div>
     </section>
-        
+    
     <script>
         const toggle = document.querySelector('.menu-toggle');
         const nav = document.querySelector('.header nav');
-    
+
         toggle.addEventListener('click', () => {
             nav.classList.toggle('active');
         });
     </script>
-    
 </body>
 </html>
-
-
