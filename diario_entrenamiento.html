@@ -17,36 +17,40 @@
     </header>
 
     <section class="form-section">
-        <h2>Registrar Nuevo Entrenamiento</h2>
-        <form id="form-entrenamiento">
-            <label for="fecha">Fecha:</label>
-            <input type="date" id="fecha" name="fecha" required>
-            <div class="input-con-contador">
+        <div id="registro-colapsable" class="colapsado">
+            <span class="flecha-toggle"></span>
+            <h2>Registrar Nuevo Entrenamiento</h2>
+            <form id="form-entrenamiento" class="oculto">
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha" name="fecha" required>
+
                 <label for="tipo_ejercicio">Ejercicio:</label>
-                <input type="text" id="tipo_ejercicio" name="tipo_ejercicio" placeholder="Ejemplo: Press de banca" maxlength="40" required>
-                <span id="contador-ejercicio"></span>
-            </div>
+                <div class="input-con-contador">
+                    <input type="text" id="tipo_ejercicio" name="tipo_ejercicio" placeholder="Ejemplo: Press de banca" maxlength="40" required>
+                    <span id="contador-ejercicio"></span>
+                </div>
 
-            <label for="repeticiones">Repeticiones:</label>
-            <input type="number" id="repeticiones" name="repeticiones" min="0" required>
+                <label for="repeticiones">Repeticiones:</label>
+                <input type="number" id="repeticiones" name="repeticiones" min="0" required>
 
-            <label for="series">Series:</label>
-            <input type="number" id="series" name="series" min="0" required>
+                <label for="series">Series:</label>
+                <input type="number" id="series" name="series" min="0" required>
 
-            <label for="peso">Peso (kg):</label>
-            <input type="number" id="peso" name="peso" step="0.1">
+                <label for="peso">Peso (kg):</label>
+                <input type="number" id="peso" name="peso" step="0.1">
 
-            <label for="tiempo">Tiempo (min):</label>
-            <input type="number" id="tiempo" name="tiempo" step="0.1">
+                <label for="tiempo">Tiempo (min):</label>
+                <input type="number" id="tiempo" name="tiempo" step="0.1">
 
-            <div class="input-con-contador">
                 <label for="notas">Notas:</label>
-                <textarea id="notas" name="notas" placeholder="Observaciones del entrenamiento" maxlength="120"></textarea>
-                <span id="contador-notas"></span>
-            </div>
+                <div class="input-con-contador">
+                    <textarea id="notas" name="notas" placeholder="Observaciones del entrenamiento" maxlength="120"></textarea>
+                    <span id="contador-notas"></span>
+                </div>
 
-            <button type="submit">Guardar Entrenamiento</button>
-        </form>
+                <button type="submit">Guardar Entrenamiento</button>
+            </form>
+        </div>
     </section>
 
     <section class="lista-entrenamientos">
@@ -303,5 +307,22 @@
     }
 
     </script>
+
+    <script>
+        // EFECTO DESPLIEGUE DEL FORMULARIO
+        const cajaRegistro = document.getElementById("registro-colapsable");
+    
+        cajaRegistro.addEventListener("click", (e) => {
+        // Evita que haga toggle al hacer clic dentro del formulario (botones, inputs)
+        if (e.target.tagName.toLowerCase() === "input" || 
+            e.target.tagName.toLowerCase() === "textarea" || 
+            e.target.tagName.toLowerCase() === "button" ||
+            e.target.closest("form")) return;
+    
+        cajaRegistro.classList.toggle("expandido");
+        cajaRegistro.classList.toggle("colapsado");
+        });
+    </script>
+  
 </body>
 </html>
