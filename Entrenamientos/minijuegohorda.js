@@ -99,7 +99,7 @@ function iniciarMinijuegoHorda() {
           obs.x -= 5;
           ctx.drawImage(obs.img, obs.x, obs.y, obs.width, obs.height);
   
-          if (detectarColision({ x: zombieX, y: zombieY, width: 50, height: 50 }, obs)) {
+          if (detectarColision({ x: zombieX, y: zombieY, width: 70, height: 70 }, obs)) {
             gameOver = true;
             alert('💀 El zombie ha chocado. ¡Fin del juego!');
           }
