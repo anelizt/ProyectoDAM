@@ -1,116 +1,224 @@
-/* --- ESTILOS GENERALES --- */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #48a259;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
 
-/* --- ENCABEZADO Y NAVEGACIÓN --- */
+/* --- RESET Y BASE --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('assets/loginbackground.png');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #e0e0e0;
+    text-align: center;
+    padding-top: 100px;
+}
+
+/* --- ENCABEZADO Y NAVEGACIÓN --- */
 header {
-    background: #f3b733;
-    color: black;
-    padding: 15px;
+    font-family: 'Creepster', cursive;
     width: 100%;
-    background-color: #f3b733;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #39ff14;
+    text-align: center;
+    padding: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 0 0 5px #39ff14;
+    box-shadow: 0 0 10px black;
+    position: fixed;
+    top: 0vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    width: 100%;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #39ff14;
+    text-shadow: 0 0 5px #39ff14;
 }
 
 nav {
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 nav a {
-    color: black;
+    color: #39ff14;
     text-decoration: none;
-    font-size: 18px;
+    margin: 0 15px;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
 }
 
 nav a:hover {
-    text-decoration: underline;
+    color: #ffffff;
+    text-shadow: 0 0 5px #fff;
 }
 
-.zombi-btn {
-    display: inline-block;
-    width: 120px; 
-    height: 120px;
-    margin-bottom: -20px;
-    background-image: url('assets/boton_volver_cerrada.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    transition: background-image 0.2s ease-in-out;
-}
-
-.zombi-btn:hover {
-    background-image: url('assets/boton_volver_abierta.png');
-}
-
-/* --- SECCIONES GENERALES --- */
+/* --- SECCIONES --- */
 section {
-    background: #333333;
-    margin: 20px auto;
-    padding: 50px;
+    background-color: rgba(0, 0, 0, 0.8);
+    margin: 40px auto;
+    padding: 40px;
     width: 90%;
-    max-width: 800px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    color: #eeeeee;
+    max-width: 900px;
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
+    border-radius: 10px;
 }
 
 h2 {
-    color: #eeeeee;
+    color: #39ff14;
+    font-family: 'Creepster', cursive;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 5px #39ff14;
 }
 
-/* --- FORMULARIO DE REGISTRO DE ENTRENAMIENTO --- */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+/* --- FORMULARIO --- */
 
 label {
     text-align: left;
     font-weight: bold;
+    color: #ffffff;
 }
 
-input, textarea, button {
+input, textarea {
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #ddd;
+    border: none;
     border-radius: 5px;
-    width: 100%;
+    background-color: #1a1a1a;
+    color: #39ff14;
+    box-shadow: inset 0 0 5px rgba(57, 255, 20, 0.2);
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    box-shadow: 0 0 10px #39ff14;
 }
 
 textarea {
     resize: vertical;
 }
 
-button {
-    background-color: #ff0000;
-    color: white;
+/* --- FORMULARIO COLAPSABLE --- */
+#registro-colapsable form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    margin-top: 20px;
+    align-items: stretch;
+  }
+
+  
+#registro-colapsable {
+    background-color: rgba(0, 0, 0, 0.85);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    color: #39ff14;
+    font-family: 'Creepster', cursive;
+    text-align: center;
     cursor: pointer;
+    transition: all 0.5s ease;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  #registro-colapsable.colapsado {
+    max-height: 70px;
+  }
+
+  /* --- ANIMAR FLECHA ---  */
+  .flecha-toggle {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    width: 12px;
+    height: 12px;
+    border-right: 3px solid #179202;
+    border-bottom: 3px solid #179202;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease, filter 0.3s ease;
+    filter: drop-shadow(0 0 2px #179202);
+    z-index: 10;
+    cursor: pointer;
+  }
+  
+  #registro-colapsable.expandido .flecha-toggle {
+    transform: rotate(-135deg);
+  }
+  
+  /* --- FFORMULARIO OCULTO --- */
+  #registro-colapsable .oculto {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  
+  /* ---- FORMULARIO VISIBLE ---- */
+  #registro-colapsable.expandido .oculto {
+    display: flex;
+    opacity: 1;
+    margin-top: 20px;
+    animation: aparecerDesdeLasSombras 0.5s ease-out;
+  }
+  
+  /* --- ANIMACIÓN DESPLEGADO --- */
+  @keyframes aparecerDesdeLasSombras {
+    0% {
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+      filter: brightness(0.5) blur(2px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: brightness(1) blur(0);
+    }
+  }
+
+/* --- BOTÓN DE GUARDAR --- */
+button {
+    background-color: #39ff14;
+    color: black;
     font-weight: bold;
-    border: #ff0000;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 0 10px #39ff14;
 }
 
 button:hover {
-    background-color: #6b8772;
+    background-color: #2ddb10;
+    transform: scale(1.02);
 }
 
-/* --- CONTADOR CARACTERES NOTAS Y EJERCICIO --- */
+/* --- CONTADOR DE CARACTERES --- */
+
+.input-con-contador input,
+.input-con-contador textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .input-con-contador {
     position: relative;
-    width: 100%;
-}
-
-.input-con-contador input {
-    padding-right: 40px; /* no borrar - deja espacio para el contador */
 }
 
 .input-con-contador span {
@@ -122,36 +230,38 @@ button:hover {
     pointer-events: none;
 }
 
-
-
 /* --- TABLA DE ENTRENAMIENTOS --- */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background-color: rgba(20, 20, 20, 0.9);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
+    padding: 12px;
     text-align: center;
-    white-space: normal;
-    min-height: 100px;
+    color: #ddd;
+    border-bottom: 1px solid #444;
+    vertical-align: middle;
 }
 
 th {
-    background-color: #6b8772;
-    color: white;
+    background-color: #39ff14;
+    color: black;
+    text-shadow: 0 0 3px #000;
 }
 
-td.acciones { 
+td.acciones {
+    display: flex;
     justify-content: center;
-    align-items: center;
     gap: 10px;
-    padding: 5px 0
 }
 
-/* limitar ancho para evitar que expanda la tabla en notas */
+/* --- NOTAS --- */
 .nota-wrap {
     max-width: 100%;
     overflow-wrap: break-word;
@@ -159,100 +269,43 @@ td.acciones {
     white-space: normal;
     display: block;
     text-align: left;
+    color: #eee;
 }
 
-
-
-/* --- BOTONES DE ACCIÓN --- */
+/* --- ICONOS DE ACCIÓN --- */
+.delete-icon, .edit-icon {
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
 
 .delete-icon {
-    width:40px;
-    height: 40px;
-    cursor: pointer;
     background-image: url('assets/boton_eliminar_cerrado.png');
-    background-size:contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    border: none;
-    display: inline-block;
-    cursor: pointer;
-}
-.edit-icon {
-    width:36px;
-    height: 36px;
-    cursor: pointer;
-    background-image: url('assets/boton_editar_off.png');
-    background-size:contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    border: none;
-    display: inline-block;
-    cursor: pointer;
 }
 
-/* Cambia la imagen al hacer hover */
 .delete-icon:hover {
     background-image: url('assets/boton_eliminar_abierto.png');
+    transform: scale(1.1);
 }
+
+.edit-icon {
+    background-image: url('assets/boton_editar_off.png');
+}
+
 .edit-icon:hover {
     background-image: url('assets/boton_editar_on.png');
+    transform: scale(1.1);
 }
 
-/* ---- destino_dropdaown.html ---- */
-ul {
-    list-style-type: disc; 
-    padding-left: 20px; 
-    margin-top: 5px; 
-}
-
-ul li {
-    text-align: left; 
-    display: block; 
-    margin-bottom: 5px; 
-}
-
-/*GALERÍA DE CAPTURAS DE MINECRAFT (destino_dropdown.html)*/
-
-.galeria {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-  
-  .galeria a {
-    display: block;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.2s ease;
-  }
-  
-  .galeria img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-    border: 2px solid #eee;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .galeria a:hover {
-    transform: scale(1.03);
-  }
-
-  @media screen and (max-width: 768px) {
-    header {
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    h1 {
-        font-size: 1.5rem;
-    }
-
-    h2, h3 {
-        font-size: 1.2rem;
+/* --- RESPONSIVE --- */
+@media screen and (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
     }
 
     section {
@@ -260,32 +313,33 @@ ul li {
         width: 95%;
     }
 
-    ul {
-        padding-left: 15px;
+    th, td {
+        font-size: 14px;
+        padding: 8px;
     }
 
-    video {
-        width: 100% !important;
-        height: auto;
+    .delete-icon, .edit-icon {
+        width: 32px;
+        height: 32px;
     }
 
-    p {
-        padding: 0 10px;
-    }
-
-    .galeria {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 0.5rem;
-    }
-
-    .galeria img {
-        border-width: 1px;
-    }
-
-    nav a img {
-        width: 40px;
-        height: auto;
+    button {
+        font-size: 0.9rem;
     }
 }
 
+/* --- EFECTO ICONO FECHA --- */
+
+    
+    input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) drop-shadow(0 0 2px #39ff14);
+    opacity: 0.9;
+    cursor: pointer;
+    transition: filter 0.3s ease;
+  }
+  
+  input[type="date"]:hover::-webkit-calendar-picker-indicator {
+    filter: invert(1) drop-shadow(0 0 10px #39ff14);
+  }
+  
   
