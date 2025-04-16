@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Modo Horda</title>
   <link rel="stylesheet" href="../main.css" />
-  <link rel="stylesheet" href="/Entrenamientos/horda.css" />
+  <link rel="stylesheet" href="horda.css" />
 </head>
 <body>
 
   <!-- Botón para volver -->
-  <a href="/index.html" class="back-button">¿Huyes como un humano cobarde?</a>
+  <a href="../index.html" class="back-button">¿Huyes como un humano cobarde?</a>
 
   <main class="cardio-container">
     <section class="intro">
@@ -129,10 +129,11 @@
   <script src="minijuegohorda.js"></script>
   <script src="turncards.js"></script>
   <script>
-    document.getElementById('start-minijuego').addEventListener('click', () => {
+    document.getElementById('start-minijuego').addEventListener('click', (e) => {
+      e.target.blur();
       const gameContainer = document.getElementById('gameCanvas');
       gameContainer.style.display = 'block';
-      iniciarMinijuegoHorda(); // Esta función debe estar definida en minijuegohorda.js
+      iniciarMinijuegoHorda();
     });
   </script>
 </body>
