@@ -1,5 +1,5 @@
 body {
-  background-image: url('assets/landing.jpeg');
+  background-image: url('../assets/landing.jpeg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -101,7 +101,7 @@ body {
 }
 
 .flip-card-back {
-  background-image: url('assets/cardiosupervivencia/cardback.png');
+  background-image: url('../assets/cardiosupervivencia/cardback.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

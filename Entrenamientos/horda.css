@@ -1,0 +1,112 @@
+@import url('./cardio.css');
+
+/* MODO HORDA: Personalización temática adicional */
+
+body {
+  background-image: url('../assets/landing.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  filter: brightness(1.1);
+}
+
+/* Nueva clase para centrar el contenido del minijuego */
+.minijuego-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* Personalización por roles */
+.aplastador .flip-card-back {
+  border: 2px solid crimson;
+  background-color: rgba(60, 0, 0, 0.8);
+}
+
+.rastreador .flip-card-back {
+  border: 2px dashed #39ff14;
+  background-color: rgba(0, 30, 0, 0.7);
+}
+
+.saltador .flip-card-back {
+  border: 2px dotted #00aaff;
+  background-color: rgba(0, 0, 40, 0.7);
+}
+
+.minijuego-instrucciones {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: white;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.minijuego-instrucciones h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #39ff14;
+  text-shadow: 1px 1px 3px black;
+}
+
+.minijuego-instrucciones ul {
+  list-style-type: disc;
+  padding-left: 1.5em;
+  text-align: left;
+}
+
+.minijuego-instrucciones li {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #f1f1f1;
+}
+
+.minijuego-instrucciones strong {
+  color: #ffffff;
+}
+
+.minijuego-boton {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.minijuego-boton button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: #39ff14;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  animation: pulseButton 1.5s infinite;
+}
+
+.minijuego-boton button:hover {
+  background-color: #2ec10e;
+}
+
+@keyframes pulseButton {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 5px #39ff14;
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #39ff14;
+  }
+}
+
+.minijuego-canvas {
+  display: block;
+  margin: 40px auto 0 auto;
+  border: 4px solid #39ff14;
+  border-radius: 10px;
+  background-color: #1a1a1a;
+}
