@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="icon" type="image/png" href="assets/zombi.png">
     <link rel="stylesheet" href="diario_entrenamiento.css">
 </head>
+
 <body>
     <header>
         <h1>Diario de Entrenamiento</h1>
@@ -26,7 +28,8 @@
 
                 <label for="tipo_ejercicio">Ejercicio:</label>
                 <div class="input-con-contador">
-                    <input type="text" id="tipo_ejercicio" name="tipo_ejercicio" placeholder="Ejemplo: Press de banca" maxlength="40" required>
+                    <input type="text" id="tipo_ejercicio" name="tipo_ejercicio" placeholder="Ejemplo: Press de banca"
+                        maxlength="40" required>
                     <span id="contador-ejercicio"></span>
                 </div>
 
@@ -44,7 +47,8 @@
 
                 <label for="notas">Notas:</label>
                 <div class="input-con-contador">
-                    <textarea id="notas" name="notas" placeholder="Observaciones del entrenamiento" maxlength="120"></textarea>
+                    <textarea id="notas" name="notas" placeholder="Observaciones del entrenamiento"
+                        maxlength="120"></textarea>
                     <span id="contador-notas"></span>
                 </div>
 
@@ -65,7 +69,7 @@
                     <th>Peso (kg)</th>
                     <th>Tiempo (min)</th>
                     <th>Notas</th>
-                    <th>Acciones</th>
+                    <th class="acciones">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -79,8 +83,10 @@
                     <td></td>
                     <td></td>
                     <td>
-                        <button class="edit-btn">Editar</button>
-                        <button class="delete-btn">Eliminar</button>
+                        <div class="acciones-wrap">
+                            <div class="edit-icon" data-id="${id}"></div>
+                            <div class="delete-icon" data-id="${id}"></div>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -88,241 +94,255 @@
     </section>
 
     <script>
-    let idEditando = null;  
-    let contadorEjercicio;
-    let contadorNotas;
-    const maxEjercicio = 40;
-    const maxNotas = 120;
-    document.addEventListener("DOMContentLoaded", function () {
-    let form = document.getElementById("form-entrenamiento");
-    let botonGuardar = document.querySelector("#form-entrenamiento button");
-    let id_usuario = parseInt(localStorage.getItem("id_usuario"), 10);
-    // Muestra los carac. restantes que quedan en lso campos notas y ejercicio
-    const ejercicioInput = document.getElementById("tipo_ejercicio");
-    contadorEjercicio = document.getElementById("contador-ejercicio");
-
-    const notasInput = document.getElementById("notas");
-    contadorNotas = document.getElementById("contador-notas");
-
-    contadorEjercicio.innerText = `${maxEjercicio}`;
-    contadorNotas.innerText = `${maxNotas}`;
-    
-    // Resta 1 por cada caracter escrito y actualiza el valor en el campo
-    ejercicioInput.addEventListener("input", () => {
-        const restantes = maxEjercicio - ejercicioInput.value.length;
-        contadorEjercicio.innerText = restantes;
-    });
-
-    notasInput.addEventListener("input", () => {
-        const restantes = maxNotas - notasInput.value.length;
-        contadorNotas.innerText = restantes;
-    });
-
-
-    cargarEntrenamientos(); // Cargar los entrenamientos al iniciar la página
-
-    // Evento del formulario para registrar o actualizar entrenamiento
-    form.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        let entrenamiento = {
-            id_usuario: id_usuario, 
-            fecha: document.getElementById("fecha").value,
-            tipo_ejercicio: document.getElementById("tipo_ejercicio").value,
-            repeticiones: document.getElementById("repeticiones").value,
-            series: document.getElementById("series").value,
-            peso: document.getElementById("peso").value,
-            tiempo: document.getElementById("tiempo").value,
-            notas: document.getElementById("notas").value
-        };
-
-        if (idEditando) {
-            // Si estamos editando, actualizamos el entrenamiento
-            fetch(`http://localhost:3000/entrenamientos/${idEditando}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(entrenamiento)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert("Entrenamiento actualizado correctamente");
-                    resetearFormulario();
-                    cargarEntrenamientos();
-                } else {
-                    alert("Error al actualizar entrenamiento");
-                }
-            })
-            .catch(error => console.error("Error en la petición:", error));
-        } else {
-            // Si NO estamos editando, registramos un nuevo entrenamiento
-            fetch("http://localhost:3000/entrenamientos", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(entrenamiento)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert("Entrenamiento registrado correctamente");
-                    resetearFormulario();
-                    cargarEntrenamientos();
-                } else {
-                    alert("Error al registrar entrenamiento");
-                }
-            })
-            .catch(error => console.error("Error en la petición:", error));
-        }
-    });
-});
-
-    // FUNCIÓN PARA CARGAR ENTRENAMIENTOS
-    function cargarEntrenamientos() {
-      let id_usuario = parseInt(localStorage.getItem("id_usuario"), 10);
-      fetch(`http://localhost:3000/entrenamientos/${id_usuario}`)
-      .then(response => response.json())
-      .then(data => {
-        let tbody = document.querySelector(".lista-entrenamientos tbody");
-        tbody.innerHTML = ""; // Limpiar la tabla antes de agregar nuevos datos
-
-        if (data.success && data.entrenamientos.length > 0) {
-            data.entrenamientos.forEach(entrenamiento => {
-                let row = `<tr data-id="${entrenamiento.id_entrenamiento}">
-                    <td>${entrenamiento.fecha}</td>
-                    <td>${entrenamiento.tipo_ejercicio}</td>
-                    <td>${entrenamiento.repeticiones}</td>
-                    <td>${entrenamiento.series}</td>
-                    <td>${entrenamiento.peso}</td>
-                    <td>${entrenamiento.tiempo}</td>
-                    <td><div class="nota-wrap">${entrenamiento.notas}</div></td>
-                    <td class="acciones">
-                        <div class="edit-icon" data-id="${entrenamiento.id_entrenamiento}"></div>
-                        <div class="delete-icon" data-id="${entrenamiento.id_entrenamiento}"></div>
-                    </td>
-                </tr>`;
-                tbody.innerHTML += row;
-            });
-
-            // Asignar eventos a los botones de edición y eliminación
-            document.querySelectorAll(".edit-icon").forEach(button => {
-                button.addEventListener("click", function () {
-                    editarEntrenamiento(this.dataset.id);
-                });
-            });
-
-            document.querySelectorAll(".delete-icon").forEach(button => {
-                button.addEventListener("click", function () {
-                    eliminarEntrenamiento(this.dataset.id);
-                });
-            });
-        } else {
-            tbody.innerHTML = `<tr><td colspan="8">No hay entrenamientos registrados.</td></tr>`;
-        }
-    })
-    .catch(error => console.error("Error al obtener los entrenamientos:", error));
-   }
-
-    // FUNCIÓN PARA EDITAR ENTRENAMIENTO
-    function editarEntrenamiento(id) {
-      console.log("Editando entrenamiento con ID:", id); // <-- Para verificar si el ID llega bien
-
-      fetch(`http://localhost:3000/entrenamiento/${id}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-            let entrenamiento = data.entrenamiento;
-
-            // Llenar el formulario con los datos actuales
-            function formatearFechaLocal(fechaString) {
-                const fecha = new Date(fechaString);
-                const year = fecha.getFullYear();
-                const month = String(fecha.getMonth() + 1).padStart(2, '0');
-                const day = String(fecha.getDate()).padStart(2, '0');
-                return `${year}-${month}-${day}`;
-            }
-
-            const fechaFormateada = formatearFechaLocal(entrenamiento.fecha); // Para la fecha sea recuperada al editar entreno
-            document.getElementById("fecha").value = fechaFormateada;
-            document.getElementById("tipo_ejercicio").value = entrenamiento.tipo_ejercicio;
-            document.getElementById("repeticiones").value = entrenamiento.repeticiones;
-            document.getElementById("series").value = entrenamiento.series;
-            document.getElementById("peso").value = entrenamiento.peso;
-            document.getElementById("tiempo").value = entrenamiento.tiempo;
-            document.getElementById("notas").value = entrenamiento.notas;
-
-            // Muestra el número restante de caracteres del campo tras cargar el contenido
-            contadorEjercicio.innerText = maxEjercicio - entrenamiento.tipo_ejercicio.length;
-            contadorNotas.innerText = maxNotas - entrenamiento.notas.length;
-
-
-            // Guardar el ID del entrenamiento en la variable global
-            idEditando = id;
-
-            // Cambiar el botón "Guardar" a "Actualizar"
+        let idEditando = null;
+        let contadorEjercicio;
+        let contadorNotas;
+        const maxEjercicio = 40;
+        const maxNotas = 120;
+        document.addEventListener("DOMContentLoaded", function () {
+            let form = document.getElementById("form-entrenamiento");
             let botonGuardar = document.querySelector("#form-entrenamiento button");
-            botonGuardar.innerText = "Actualizar Entrenamiento";
-        } else {
-            alert("Error al cargar los datos del entrenamiento para editar.");
-        }
-      })
-    .catch(error => console.error("Error en la petición:", error));
-   }
+            let id_usuario = parseInt(localStorage.getItem("id_usuario"), 10);
+            // Muestra los carac. restantes que quedan en lso campos notas y ejercicio
+            const ejercicioInput = document.getElementById("tipo_ejercicio");
+            contadorEjercicio = document.getElementById("contador-ejercicio");
 
-    // FUNCIÓN PARA ELIMINAR ENTRENAMIENTO
-    function eliminarEntrenamiento(id) {
-        if (confirm("¿Seguro que deseas eliminar este entrenamiento?")) {
-            fetch(`http://localhost:3000/entrenamientos/${id}`, {
-                method: "DELETE",
-                headers: { "Content-Type": "application/json" }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Resetea formulario en caso de eliminar justo el que se edita
-                    if (idEditando && idEditando == id) {
-                        resetearFormulario();
-                    }
-                    cargarEntrenamientos();
+            const notasInput = document.getElementById("notas");
+            contadorNotas = document.getElementById("contador-notas");
+
+            contadorEjercicio.innerText = `${maxEjercicio}`;
+            contadorNotas.innerText = `${maxNotas}`;
+
+            // Resta 1 por cada caracter escrito y actualiza el valor en el campo
+            ejercicioInput.addEventListener("input", () => {
+                const restantes = maxEjercicio - ejercicioInput.value.length;
+                contadorEjercicio.innerText = restantes;
+            });
+
+            notasInput.addEventListener("input", () => {
+                const restantes = maxNotas - notasInput.value.length;
+                contadorNotas.innerText = restantes;
+            });
+
+
+            cargarEntrenamientos(); // Cargar los entrenamientos al iniciar la página
+
+            // Evento del formulario para registrar o actualizar entrenamiento
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                let entrenamiento = {
+                    id_usuario: id_usuario,
+                    fecha: document.getElementById("fecha").value,
+                    tipo_ejercicio: document.getElementById("tipo_ejercicio").value,
+                    repeticiones: document.getElementById("repeticiones").value,
+                    series: document.getElementById("series").value,
+                    peso: document.getElementById("peso").value,
+                    tiempo: document.getElementById("tiempo").value,
+                    notas: document.getElementById("notas").value
+                };
+
+                if (idEditando) {
+                    // Si estamos editando, actualizamos el entrenamiento
+                    fetch(`http://localhost:3000/entrenamientos/${idEditando}`, {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(entrenamiento)
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert("Entrenamiento actualizado correctamente");
+                                resetearFormulario();
+                                cargarEntrenamientos();
+                            } else {
+                                alert("Error al actualizar entrenamiento");
+                            }
+                        })
+                        .catch(error => console.error("Error en la petición:", error));
                 } else {
-                    alert("Error al eliminar el entrenamiento.");
+                    // Si NO estamos editando, registramos un nuevo entrenamiento
+                    fetch("http://localhost:3000/entrenamientos", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(entrenamiento)
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert("Entrenamiento registrado correctamente");
+                                resetearFormulario();
+                                cargarEntrenamientos();
+                            } else {
+                                alert("Error al registrar entrenamiento");
+                            }
+                        })
+                        .catch(error => console.error("Error en la petición:", error));
                 }
-            })
-            .catch(error => console.error("Error en la petición:", error));
+            });
+        });
+
+        // FUNCIÓN PARA CARGAR ENTRENAMIENTOS
+        function cargarEntrenamientos() {
+            let id_usuario = parseInt(localStorage.getItem("id_usuario"), 10);
+            fetch(`http://localhost:3000/entrenamientos/${id_usuario}`)
+                .then(response => response.json())
+                .then(data => {
+                    let tbody = document.querySelector(".lista-entrenamientos tbody");
+                    tbody.innerHTML = ""; // Limpiar la tabla antes de agregar nuevos datos
+
+                    if (data.success && data.entrenamientos.length > 0) {
+                        data.entrenamientos.forEach(entrenamiento => {
+                            let row = `
+                            <tr data-id="${entrenamiento.id_entrenamiento}">
+                                <td>${entrenamiento.fecha}</td>
+                                <td>${entrenamiento.tipo_ejercicio}</td>
+                                <td>${entrenamiento.repeticiones}</td>
+                                <td>${entrenamiento.series}</td>
+                                <td>${entrenamiento.peso}</td>
+                                <td>${entrenamiento.tiempo}</td>
+                                <td><div class="nota-wrap">${entrenamiento.notas}</div></td>
+                                <td class="acciones">
+                                    <div class="acciones-wrap">
+                                        <div class="edit-icon"    data-id="${entrenamiento.id_entrenamiento}"></div>
+                                        <div class="delete-icon"  data-id="${entrenamiento.id_entrenamiento}"></div>
+                                    </div>
+                                </td>
+                            </tr>`;
+                            tbody.innerHTML += row;
+                        });
+
+                        // Asignar eventos a los botones de edición y eliminación
+                        document.querySelectorAll(".edit-icon").forEach(button => {
+                            button.addEventListener("click", function () {
+                                editarEntrenamiento(this.dataset.id);
+                            });
+                        });
+
+                        document.querySelectorAll(".delete-icon").forEach(button => {
+                            button.addEventListener("click", function () {
+                                eliminarEntrenamiento(this.dataset.id);
+                            });
+                        });
+                    } else {
+                        tbody.innerHTML = `<tr><td colspan="8">No hay entrenamientos registrados.</td></tr>`;
+                    }
+                })
+                .catch(error => console.error("Error al obtener los entrenamientos:", error));
         }
-    }
 
-    // FUNCIÓN PARA RESETEAR EL FORMULARIO
-    function resetearFormulario() {  
-        document.getElementById("form-entrenamiento").reset();
-        document.querySelector("#form-entrenamiento button").innerText = "Guardar Entrenamiento";
-        idEditando = null; // Restablecer el modo de edición
-        contadorEjercicio.innerText = `${maxEjercicio}`;
-        contadorNotas.innerText = `${maxNotas}`;
-    }
+        // FUNCIÓN PARA EDITAR ENTRENAMIENTO
+        function editarEntrenamiento(id) {
 
-    // FUNCIÓN PARA CERRAR SESIÓN
-    function logout() {
-      localStorage.clear();
-      window.location.href = "index.html";
-    }
+            const cajaRegistro = document.getElementById('registro-colapsable'); // <-- Despliega el formulario
+            cajaRegistro.classList.remove('colapsado');
+            cajaRegistro.classList.add('expandido');
+
+            console.log("Editando entrenamiento con ID:", id); // <-- Para verificar si el ID llega bien
+
+            fetch(`http://localhost:3000/entrenamiento/${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        let entrenamiento = data.entrenamiento;
+
+                        // Llenar el formulario con los datos actuales
+                        function formatearFechaLocal(fechaString) {
+                            const fecha = new Date(fechaString);
+                            const year = fecha.getFullYear();
+                            const month = String(fecha.getMonth() + 1).padStart(2, '0');
+                            const day = String(fecha.getDate()).padStart(2, '0');
+                            return `${year}-${month}-${day}`;
+                        }
+
+                        const fechaFormateada = formatearFechaLocal(entrenamiento.fecha); // Para la fecha sea recuperada al editar entreno
+                        document.getElementById("fecha").value = fechaFormateada;
+                        document.getElementById("tipo_ejercicio").value = entrenamiento.tipo_ejercicio;
+                        document.getElementById("repeticiones").value = entrenamiento.repeticiones;
+                        document.getElementById("series").value = entrenamiento.series;
+                        document.getElementById("peso").value = entrenamiento.peso;
+                        document.getElementById("tiempo").value = entrenamiento.tiempo;
+                        document.getElementById("notas").value = entrenamiento.notas;
+
+                        // Muestra el número restante de caracteres del campo tras cargar el contenido
+                        contadorEjercicio.innerText = maxEjercicio - entrenamiento.tipo_ejercicio.length;
+                        contadorNotas.innerText = maxNotas - entrenamiento.notas.length;
+
+
+                        // Guardar el ID del entrenamiento en la variable global
+                        idEditando = id;
+
+                        // Cambiar el botón "Guardar" a "Actualizar"
+                        let botonGuardar = document.querySelector("#form-entrenamiento button");
+                        botonGuardar.innerText = "Actualizar Entrenamiento";
+                    } else {
+                        alert("Error al cargar los datos del entrenamiento para editar.");
+                    }
+                })
+                .catch(error => console.error("Error en la petición:", error));
+        }
+
+        // FUNCIÓN PARA ELIMINAR ENTRENAMIENTO
+        function eliminarEntrenamiento(id) {
+            if (confirm("¿Seguro que deseas eliminar este entrenamiento?")) {
+                fetch(`http://localhost:3000/entrenamientos/${id}`, {
+                    method: "DELETE",
+                    headers: { "Content-Type": "application/json" }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Resetea formulario en caso de eliminar justo el que se edita
+                            if (idEditando && idEditando == id) {
+                                resetearFormulario();
+                            }
+                            cargarEntrenamientos();
+                        } else {
+                            alert("Error al eliminar el entrenamiento.");
+                        }
+                    })
+                    .catch(error => console.error("Error en la petición:", error));
+            }
+        }
+
+        // FUNCIÓN PARA RESETEAR EL FORMULARIO
+        function resetearFormulario() {
+            document.getElementById("form-entrenamiento").reset();
+            document.querySelector("#form-entrenamiento button").innerText = "Guardar Entrenamiento";
+            idEditando = null; // Restablecer el modo de edición
+            contadorEjercicio.innerText = `${maxEjercicio}`;
+            contadorNotas.innerText = `${maxNotas}`;
+
+            // Colapsa el panel cuando terminamos de guardao editar
+            const cajaRegistro = document.getElementById("registro-colapsable");
+            cajaRegistro.classList.remove("expandido");
+            cajaRegistro.classList.add("colapsado");
+        }
+
+        // FUNCIÓN PARA CERRAR SESIÓN
+        function logout() {
+            localStorage.clear();
+            window.location.href = "index.html";
+        }
 
     </script>
 
     <script>
         // EFECTO DESPLIEGUE DEL FORMULARIO
         const cajaRegistro = document.getElementById("registro-colapsable");
-    
+
         cajaRegistro.addEventListener("click", (e) => {
-        // Evita que haga toggle al hacer clic dentro del formulario (botones, inputs)
-        if (e.target.tagName.toLowerCase() === "input" || 
-            e.target.tagName.toLowerCase() === "textarea" || 
-            e.target.tagName.toLowerCase() === "button" ||
-            e.target.closest("form")) return;
-    
-        cajaRegistro.classList.toggle("expandido");
-        cajaRegistro.classList.toggle("colapsado");
+            // Evita que haga toggle al hacer clic dentro del formulario (botones, inputs)
+            if (e.target.tagName.toLowerCase() === "input" ||
+                e.target.tagName.toLowerCase() === "textarea" ||
+                e.target.tagName.toLowerCase() === "button" ||
+                e.target.closest("form")) return;
+
+            cajaRegistro.classList.toggle("expandido");
+            cajaRegistro.classList.toggle("colapsado");
         });
     </script>
-  
+
 </body>
+
 </html>
