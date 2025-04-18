@@ -83,6 +83,7 @@
             localStorage.setItem("token", data.token);
             localStorage.setItem("id_usuario", data.id_usuario); //Guarda el id del usuario
             localStorage.setItem("rol", data.rol);
+            localStorage.setItem('nombre', data.nombre); // Nos hace falta el nombre para el círculito del panel
 
             if (data.rol === "admin") {
                 window.location.href = "admin_panel.html";
