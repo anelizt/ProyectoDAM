@@ -37,7 +37,7 @@ app.post('/login', (req, res) => {
             if (!match) return res.json({ success: false, message: 'Contraseña incorrecta' });
             
             const token = jwt.sign({ id: user.id_usuario, rol: user.rol }, secretKey, { expiresIn: '1h' });
-            res.json({ success: true, token, rol: user.rol, id_usuario: user.id_usuario });
+            res.json({ success: true, token, rol: user.rol, id_usuario: user.id_usuario, nombre: user.nombre });
         });
     });
 });
