@@ -105,6 +105,11 @@ input:focus, textarea:focus {
     box-shadow: 0 0 10px #39ff14;
 }
 
+#notas {
+    height: 80px;
+    overflow: auto;
+  }
+
 textarea {
     resize: vertical;
 }
@@ -256,8 +261,20 @@ th {
 }
 
 td.acciones {
-    display: flex;
-    justify-content: center;
+    text-align: center;
+    vertical-align: middle;
+}
+
+th.acciones,
+td.acciones {
+    width: 80px;
+}
+
+.acciones-wrap{
+    display: flex;             
+    flex-direction: row;       
+    align-items: center;       
+    justify-content: center;   
     gap: 10px;
 }
 
