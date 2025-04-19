@@ -253,17 +253,8 @@
                     if (data.success) {
                         let entrenamiento = data.entrenamiento;
 
-                        // Llenar el formulario con los datos actuales
-                        function formatearFechaLocal(fechaString) {
-                            const fecha = new Date(fechaString);
-                            const year = fecha.getFullYear();
-                            const month = String(fecha.getMonth() + 1).padStart(2, '0');
-                            const day = String(fecha.getDate()).padStart(2, '0');
-                            return `${year}-${month}-${day}`;
-                        }
-
-                        const fechaFormateada = formatearFechaLocal(entrenamiento.fecha); // Para la fecha sea recuperada al editar entreno
-                        document.getElementById("fecha").value = fechaFormateada;
+                       // Para la fecha sea recuperada al editar entreno
+                        document.getElementById("fecha").value = entrenamiento.fecha;
                         document.getElementById("tipo_ejercicio").value = entrenamiento.tipo_ejercicio;
                         document.getElementById("repeticiones").value = entrenamiento.repeticiones;
                         document.getElementById("series").value = entrenamiento.series;

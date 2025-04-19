@@ -14,11 +14,15 @@
 
         trigger.innerText = inicial;
 
-        // Con esto detecto la pagina y oculto la opción "Mis Entrenamientos" en caso de que 
-        // esté en el diario de entrenamientos.
+        // Con esto detecto la pagina y oculto la opción que sea en caso de que 
+        // esté en esa página.
         const paginaActual = window.location.pathname.split('/').pop();
         if (paginaActual === 'diario_entrenamiento.html') {
             const enlace = dropdown.querySelector('a[href="diario_entrenamiento.html"]');
+            if (enlace) enlace.remove();
+        }
+        if (paginaActual === 'panel_usuario.html') {
+            const enlace = dropdown.querySelector('a[href="panel_usuario.html"]');
             if (enlace) enlace.remove();
         }
 
@@ -29,6 +33,31 @@
         document.addEventListener('click', () => {
             dropdown.classList.remove('open');
         });
+
+        const panelLink = dropdown.querySelector('a[href="panel_usuario.html"]');
+        if (panelLink) {
+            panelLink.addEventListener('click', async e => {
+                e.preventDefault();
+
+                const resp = await fetch('http://localhost:3000/user_menu', {
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+                });
+                const data = await resp.json();
+                if (!data.success) {
+                    alert(data.message || 'Error al cargar perfil');
+                    return;
+                }
+                const user = data.usuario;
+                
+                localStorage.setItem('nombre', user.nombre);
+                localStorage.setItem('email', user.email);
+                localStorage.setItem('fechaRegistro', user.fechaRegistro);
+                localStorage.setItem('rol', user.rol);
+                localStorage.setItem('id_usuario', user.id_usuario);
+
+                window.location.href = 'panel_usuario.html';
+            });
+        }
     }
 
     // Carga el menú desplegable
