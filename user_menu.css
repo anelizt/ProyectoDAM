@@ -1,14 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
 
 .user-menu {
-    position: absolute;
-    left: 20px;
+    position: absolute;     /* dentro de .header, ya posicionado */
     top: 50%;
+    left: 20px;
     z-index: 1000;
-    font-family: Arial, sans-serif;
-    background: transparent;
-}
+  }
+  
 
 /* --- CÍRCULO CON LA INICIAL --- */
 #user-trigger {
@@ -18,9 +16,8 @@
     background-color: transparent;
     border-radius: 50%;
     color: #39ff14;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    font-size: 1.4rem;
+    font-family: 'Creepster', cursive;
+    font-size: 2rem;
     letter-spacing: 0.5px;
     display: flex;
     align-items: center;
@@ -30,7 +27,6 @@
     text-shadow: 0 0 5px #39ff14;
     cursor: pointer;
     position: relative;
-    top: 50%;
     transform: translateY(-50%) scale(1);
     transform-origin: center center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -50,7 +46,7 @@
     font-family: 'Creepster', cursive;
     width: 100%;
     position: absolute;
-    top: calc(100% + 8px);
+    top: 100%;
     left: 0;
     background-color: rgba(0, 0, 0, 0.85);
     border-radius: 8px;

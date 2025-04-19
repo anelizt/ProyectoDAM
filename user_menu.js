@@ -32,10 +32,14 @@
     }
 
     // Carga el menú desplegable
-
     function loadUserMenu() {
         const placeholder = document.getElementById('user-menu-placeholder');
         if (!placeholder) return;
+        const isLogged = !!localStorage.getItem('token'); // Buscamos el token para saber si estamos logesados
+        if (!isLogged) {
+            placeholder.innerHTML = '';
+            return;
+        }
         fetch('user_menu.html')
             .then(resp => resp.text())
             .then(html => {
@@ -46,4 +50,16 @@
     }
 
     document.addEventListener('DOMContentLoaded', loadUserMenu);
+
+    function logout() {
+        // borra las claves de sesión
+        localStorage.removeItem('token');
+        localStorage.removeItem('id_usuario');
+        localStorage.removeItem('rol');
+        localStorage.removeItem('nombre');
+        window.location.href = 'index.html';
+    }
+
+    window.logout = logout;
+
 })();
