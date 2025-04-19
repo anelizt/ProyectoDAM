@@ -1,140 +1,147 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Registro</title>
-    <link rel="stylesheet" href="registro.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Registro</title>
+  <link rel="stylesheet" href="registro.css">
 </head>
+
 <body>
-    <header class="header_inicio">
-        <div>Zombie Escape Training</div>
-      </header>
-    
-      <section class="auth-selector">
-        <button id="show-login" class="auth-btn">Iniciar Sesión</button>
-        <button id="show-register" class="auth-btn">Registrarse</button>
-      </section>
-    
-      <section class="form-container">
-        <form id="loginForm" class="auth-form hidden">
-          <h2>Inicio de sesión</h2>
-          <label for="login-email">Correo electrónico:</label>
-          <input type="email" id="login-email" required />
-          <label for="login-password">Contraseña:</label>
-          <input type="password" id="login-password" required />
-          <button type="submit" class="btn">Iniciar sesión</button>
-          <p id="login-mensaje"></p>
-        </form>
-    
-        <form id="registerForm" class="auth-form hidden">
-          <h2>Registro de Usuario</h2>
-          <label for="nombre">Nombre:</label>
-          <input type="text" id="nombre" name="nombre" required />
-          <label for="email">Correo Electrónico:</label>
-          <input type="email" id="email" name="email" required />
-          <label>Contraseña:</label>
-          <input type="password" id="password" name="password" required />
-          <label>Confirmar Contraseña:</label>
-          <input type="password" id="confirm-password" name="confirm-password" required />
-          <button type="submit" class="btn">Registrarse</button>
-          <p id="register-mensaje"></p>
-        </form>
-      </section>
+  <header class="header_inicio">
+    <div>Zombie Escape Training</div>
+  </header>
 
-    
-        <script>
+  <section class="auth-selector">
+    <button id="show-login" class="auth-btn">Iniciar Sesión</button>
+    <button id="show-register" class="auth-btn">Registrarse</button>
+  </section>
 
-            const showLoginBtn = document.getElementById("show-login");
-            const showRegisterBtn = document.getElementById("show-register");
-            const loginForm = document.getElementById("loginForm");
-            const registerForm = document.getElementById("registerForm");
+  <section class="form-container">
+    <form id="loginForm" class="auth-form hidden">
+      <h2>Inicio de sesión</h2>
+      <label for="login-email">Correo electrónico:</label>
+      <input type="email" id="login-email" required />
+      <label for="login-password">Contraseña:</label>
+      <input type="password" id="login-password" required />
+      <button type="submit" class="btn">Iniciar sesión</button>
+      <p id="login-mensaje"></p>
+    </form>
 
-            showLoginBtn.addEventListener("click", () => {
-                registerForm.classList.remove("visible");
-                registerForm.classList.add("hidden");
-                loginForm.classList.remove("hidden");
-                loginForm.classList.add("visible");
-            });
+    <form id="registerForm" class="auth-form hidden">
+      <h2>Registro de Usuario</h2>
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required />
+      <label for="email">Correo Electrónico:</label>
+      <input type="email" id="email" name="email" required />
+      <label>Contraseña:</label>
+      <input type="password" id="password" name="password" required />
+      <label>Confirmar Contraseña:</label>
+      <input type="password" id="confirm-password" name="confirm-password" required />
+      <button type="submit" class="btn">Registrarse</button>
+      <p id="register-mensaje"></p>
+    </form>
+  </section>
 
-            showRegisterBtn.addEventListener("click", () => {
-                loginForm.classList.remove("visible");
-                loginForm.classList.add("hidden");
-                registerForm.classList.remove("hidden");
-                registerForm.classList.add("visible");
-            });
-            //FORMULARIO DE INICIO DE SESIÓN//
 
-            
-            document.getElementById("loginForm").addEventListener("submit", function(event) {
-            event.preventDefault();
+  <script>
 
-            let email = document.getElementById("login-email").value;
-            let password = document.getElementById("login-password").value;
+    const showLoginBtn = document.getElementById("show-login");
+    const showRegisterBtn = document.getElementById("show-register");
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
 
-            fetch("http://localhost:3000/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password })
-            })
-            .then(response => response.json())
-            .then(data => {
-            if (data.success) {
+    showLoginBtn.addEventListener("click", () => {
+      registerForm.classList.remove("visible");
+      registerForm.classList.add("hidden");
+      loginForm.classList.remove("hidden");
+      loginForm.classList.add("visible");
+    });
+
+    showRegisterBtn.addEventListener("click", () => {
+      loginForm.classList.remove("visible");
+      loginForm.classList.add("hidden");
+      registerForm.classList.remove("hidden");
+      registerForm.classList.add("visible");
+    });
+    //FORMULARIO DE INICIO DE SESIÓN//
+
+
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      let email = document.getElementById("login-email").value;
+      let password = document.getElementById("login-password").value;
+
+      fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
             localStorage.setItem("token", data.token);
             localStorage.setItem("id_usuario", data.id_usuario); //Guarda el id del usuario
             localStorage.setItem("rol", data.rol);
             localStorage.setItem('nombre', data.nombre); // Nos hace falta el nombre para el círculito del panel
 
             if (data.rol === "admin") {
-                window.location.href = "admin_panel.html";
+              window.location.href = "admin_panel.html";
             } else {
-                window.location.href = "diario_entrenamiento.html";
+              window.location.href = 'index.html';
             }
-            } else {
+          } else {
             document.getElementById("login-mensaje").innerText = data.message;
-            }
-            })
-            .catch(error => console.error("Error en la petición:", error));
-            });
-
-            //FORMULARIO DE REGISTRO//
-           document.getElementById("registerForm").addEventListener("submit", function(event) {
-           event.preventDefault();
-
-           let nombre = document.getElementById("nombre").value;
-           let email = document.getElementById("email").value;
-           let password = document.getElementById("password").value;
-           let confirmPassword = document.getElementById("confirm-password").value;
-
-           if (password !== confirmPassword) {
-            document.getElementById("register-mensaje").innerText = "Las contraseñas no coinciden.";
-            return;
           }
+        })
+        .catch(error => console.error("Error en la petición:", error));
+    });
 
-           fetch("http://localhost:3000/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ nombre, email, password })
-           })
-           .then(response => response.json())
-           
-           .then(data => {
-            if (data.success) {
+    //FORMULARIO DE REGISTRO//
+    document.getElementById("registerForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      let nombre = document.getElementById("nombre").value;
+      let email = document.getElementById("email").value;
+      let password = document.getElementById("password").value;
+      let confirmPassword = document.getElementById("confirm-password").value;
+
+      if (password !== confirmPassword) {
+        document.getElementById("register-mensaje").innerText = "Las contraseñas no coinciden.";
+        return;
+      }
+
+      fetch("http://localhost:3000/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nombre, email, password })
+      })
+        .then(response => response.json())
+
+        .then(data => {
+          if (data.success) {
             // Guardamos el id del nuevo usuario en localStorage
             localStorage.setItem("id_usuario", data.id_usuario);
             localStorage.setItem("rol", "usuario");
+            localStorage.setItem('nombre', nombre);
 
             document.getElementById("register-mensaje").innerText = "Registro exitoso. Redirigiendo...";
+
+            localStorage.setItem("token", data.token);
+
             setTimeout(() => {
-            window.location.href = "diario_entrenamiento.html";
+              window.location.href = "index.html";
             }, 2000);
-            } else {
+          } else {
             document.getElementById("register-mensaje").innerText = data.message;
-            }
-           })
-           .catch(error => console.error("Error en la petición:", error));
-          });
-       </script>
+          }
+        })
+        .catch(error => console.error("Error en la petición:", error));
+    });
+  </script>
 
 </body>
+
 </html>

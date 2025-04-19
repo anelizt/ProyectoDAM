@@ -13,6 +13,7 @@ body {
 }
 
 .header {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -26,6 +27,10 @@ body {
     box-shadow: 0 0 4px black;
     gap: 50px;
     
+}
+
+.header .logo{
+    margin-left: 30px;
 }
 
 .header nav {

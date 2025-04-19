@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,10 +11,15 @@
     <!-- Estilos exclusivos de la landing page -->
     <link rel="stylesheet" href="landing.css">
 </head>
+
 <body>
     <header class="header">
-        <div>Zombie Escape Training</div>
+        
+        <div class="logo">Zombie Escape Training</div>
+        <div id="user-menu-placeholder"></div>
+
         <nav>
+            
             <div class="nav-item">
                 <a>Entrenamientos</a>
                 <div class="dropdown">
@@ -23,7 +29,7 @@
                     <a href="Entrenamientos/fatiga_post.html">Fatiga Post-Apocalipsis 💀</a>
                 </div>
             </div>
-            
+
             <div class="nav-item">
                 <a>Objetivo</a>
                 <div class="dropdown">
@@ -53,15 +59,17 @@
         <div class="hero-text">
             <h1>¡Corre, esquiva y sobrevive!</h1>
             <p>Diario de entrenamiento post-apocalíptico</p>
-            <a href="registro.html">
-               <button class="btn">¡Pruébalo ya!</button>
-            </a>
+            <div id="register-btn">
+                <a href="registro.html">
+                    <button class="btn">¡Pruébalo ya!</button>
+                </a>
+            </div>
         </div>
 
         <!-- Zombie oculto que parpadea -->
         <div class="hidden-zombie" title="¡Me has visto!"></div>
     </section>
-    
+
     <script>
         const toggle = document.querySelector('.menu-toggle');
         const nav = document.querySelector('.header nav');
@@ -70,5 +78,28 @@
             nav.classList.toggle('active');
         });
     </script>
+
+    <!-- Modificamos el estilo de la web si se ha loggeado -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const isLogged = !!localStorage.getItem('token');
+          const registerBtn = document.getElementById('register-btn');
+      
+          if (isLogged) {
+            registerBtn.style.display = 'none';
+            // Logout
+            userMenuContainer.querySelector('#logout').addEventListener('click', e => {
+              e.preventDefault();
+              localStorage.removeItem('token');
+              localStorage.removeItem('id_usuario');
+              localStorage.removeItem('rol');
+              localStorage.removeItem('nombre');
+              location.reload();
+            });
+          }
+        });
+      </script>
+      <script src="user_menu.js"></script>
 </body>
+
 </html>
