@@ -32,6 +32,8 @@
                 <p><strong>Nombre:</strong> <span id="user-name"></span></p>
                 <p><strong>Email:</strong> <span id="user-email"></span></p>
                 <p><strong>Fecha de Registro:</strong> <span id="user-date"></span></p>
+                <p><strong>Total Entrenamientos:</strong> <span id="total-entrenamientos"></span></p>
+                <p><strong>Días luchando contra Zombies:</strong> <span id="dias-zombies"></span></p>
             </div>
             <div id="delete-user" class="delete-user-icon" title="Eliminar mi cuenta"></div>
         </div>
@@ -40,46 +42,71 @@
     <script src="user_menu.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            const idUsuario = localStorage.getItem("id_usuario");
             const nombre = localStorage.getItem("nombre") || "";
             const email = localStorage.getItem("email") || "";
-            const registro = localStorage.getItem("registroFecha") || "";
+            const registro = localStorage.getItem("fechaRegistro") || "";
 
             const inicial = nombre.charAt(0).toUpperCase() || "?";
             document.getElementById("profile-initial").innerText = inicial;
             document.getElementById("user-name").innerText = nombre;
             document.getElementById("user-email").innerText = email;
             document.getElementById("user-date").innerText = registro;
+
+            // Calculamos la diferencia de los días entre el registro y el día actual
+            // para mostrarlo en el campo "días luchando contra zombies"
+            const [d, m, a] = registro.split('/');
+            const fechaReg = new Date(+a, m - 1, +d);
+            const hoy = new Date();
+            // calculamos diferencia en milisegundos y luego en días, sumando 1 para contar el día actual
+            const diffMs = hoy - fechaReg;
+            const dias = Math.floor(diffMs / (1000 * 60 * 60 * 24)) + 1;
+            document.getElementById("dias-zombies").innerText = dias > 0 ? dias : 1;
+
+            // Tenemos que hace un fetch a los entreno spara sacar la cantidad que hay en el diario
+            fetch(`http://localhost:3000/entrenamientos/${idUsuario}`)
+                .then(response => response.json())
+                .then(data => {
+                    const total = data.success && Array.isArray(data.entrenamientos)
+                        ? data.entrenamientos.length
+                        : 0;
+                    document.getElementById("total-entrenamientos").innerText = total;
+                })
+                .catch(err => {
+                    console.error("No se pudo cargar el total de entrenamientos:", err);
+                    document.getElementById("total-entrenamientos").innerText = "–";
+                });
         });
     </script>
     <script>
         // Script para borrar la cuenta de usuario
         document.addEventListener("DOMContentLoaded", () => {
-          const delBtn = document.getElementById('delete-user');
-          delBtn.addEventListener('click', async () => {
-            if (!confirm('¿Estás seguro de que quieres eliminar tu cuenta? Esta acción es irreversible.')) {
-              return;
-            }
-            const id = localStorage.getItem('id_usuario');
-            try {
-              const resp = await fetch(`http://localhost:3000/usuarios/${id}`, {
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-              });
-              const data = await resp.json();
-              if (data.success) {
-                alert('Tu cuenta ha sido eliminada.');
-                localStorage.clear();
-                window.location.href = 'index.html';
-              } else {
-                alert('Error al eliminar la cuenta: ' + (data.message||'desconocido'));
-              }
-            } catch (err) {
-              console.error(err);
-              alert('Error de red al intentar eliminar la cuenta.');
-            }
-          });
+            const delBtn = document.getElementById('delete-user');
+            delBtn.addEventListener('click', async () => {
+                if (!confirm('¿Estás seguro de que quieres eliminar tu cuenta? Esta acción es irreversible.')) {
+                    return;
+                }
+                const id = localStorage.getItem('id_usuario');
+                try {
+                    const response = await fetch(`http://localhost:3000/usuarios/${id}`, {
+                        method: 'DELETE',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+                    });
+                    const data = await response.json();
+                    if (data.success) {
+                        alert('Tu cuenta ha sido eliminada.');
+                        localStorage.clear();
+                        window.location.href = 'index.html';
+                    } else {
+                        alert('Error al eliminar la cuenta: ' + (data.message || 'desconocido'));
+                    }
+                } catch (err) {
+                    console.error(err);
+                    alert('Error de red al intentar eliminar la cuenta.');
+                }
+            });
         });
-      </script>
+    </script>
 </body>
 
 </html>

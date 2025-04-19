@@ -81,10 +81,13 @@
       })
         .then(response => response.json())
         .then(data => {
+
           if (data.success) {
+
             localStorage.setItem("token", data.token);
             localStorage.setItem("id_usuario", data.id_usuario); //Guarda el id del usuario
             localStorage.setItem("rol", data.rol);
+            localStorage.setItem('fechaRegistro', fechaFormateada);
             localStorage.setItem('nombre', data.nombre); // Nos hace falta el nombre para el círculito del panel
             localStorage.setItem('email', email); // Lo necesitamos para recuperarlo luego en el panel de usuario
             if (data.rol === "admin") {
@@ -127,6 +130,7 @@
             localStorage.setItem("rol", "usuario");
             localStorage.setItem('nombre', nombre);
             localStorage.setItem('email', email);
+            localStorage.setItem('fechaRegistro', fechaRegistro);
 
             document.getElementById("register-mensaje").innerText = "Registro exitoso. Redirigiendo...";
 

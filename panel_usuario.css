@@ -78,7 +78,7 @@ header h1 {
 /* --- CONTENEDOR CENTRAL --- */
 .profile-wrapper {
     position: relative;
-    max-width: 400px;
+    max-width: 500px;
     margin: 100px auto;
     background: rgba(0, 0, 0, 0.4);
     padding: 40px;

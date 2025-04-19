@@ -26,7 +26,7 @@ const secretKey = 'secreto_super_seguro';
 // LOGIN
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
-    
+
     const sql = 'SELECT * FROM usuarios WHERE email = ?';
     db.query(sql, [email], (err, results) => {
         if (err) return res.status(500).json({ success: false, message: 'Error en el servidor' });
@@ -35,9 +35,9 @@ app.post('/login', (req, res) => {
         const user = results[0];
         bcrypt.compare(password, user.contraseña, (err, match) => {
             if (!match) return res.json({ success: false, message: 'Contraseña incorrecta' });
-            
+
             const token = jwt.sign({ id: user.id_usuario, rol: user.rol }, secretKey, { expiresIn: '1h' });
-            res.json({ success: true, token, rol: user.rol, id_usuario: user.id_usuario, nombre: user.nombre });
+            res.json({ success: true, token, rol: user.rol, id_usuario: user.id_usuario, nombre: user.nombre, email: user.email, fechaRegistro: user.fechaRegistro });
         });
     });
 });
@@ -45,14 +45,45 @@ app.post('/login', (req, res) => {
 // REGISTRO
 app.post('/register', (req, res) => {
     const { nombre, email, password } = req.body;
-    
+
     bcrypt.hash(password, 10, (err, hash) => {
         if (err) return res.status(500).json({ success: false, message: 'Error al cifrar contraseña' });
-        
+
         const sql = 'INSERT INTO usuarios (nombre, email, contraseña, rol) VALUES (?, ?, ?, ?)';
         db.query(sql, [nombre, email, hash, 'usuario'], (err, result) => {
             if (err) return res.status(500).json({ success: false, message: 'Error al registrar usuario' });
             res.json({ success: true, message: 'Usuario registrado correctamente', id_usuario: result.insertId });
+        });
+    });
+});
+
+// PANEL USUARIO
+app.get('/user_menu', (req, res) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ success: false, message: 'Token no proporcionado' });
+    }
+    const token = authHeader.split(' ')[1];
+    jwt.verify(token, secretKey, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ success: false, message: 'Token inválido' });
+        }
+        const id_usuario = decoded.id;
+        const sql = `SELECT *, DATE_FORMAT(fechaRegistro, "%d/%m/%Y") AS fechaRegistro FROM usuarios WHERE id_usuario = ?`;
+        db.query(sql, [id_usuario], (err, results) => {
+            if (err) {
+                console.error('Error al leer usuario:', err);
+                return res.status(500).json({ success: false, message: 'Error en el servidor' });
+            }
+            if (results.length === 0) {
+                return res.status(404).json({ success: false, message: 'Usuario no encontrado' });
+            }
+            const user = results[0];
+            res.json({success: true,
+                usuario: {
+                    id_usuario: user.id_usuario, nombre: user.nombre, email: user.email, rol: user.rol, fechaRegistro: user.fechaRegistro
+                }
+            });
         });
     });
 });
@@ -84,7 +115,7 @@ app.delete('/entrenamientos/:id', (req, res) => {
 app.put('/entrenamientos/:id', (req, res) => {
     const id_entrenamiento = req.params.id;
     const { fecha, tipo_ejercicio, repeticiones, series, peso, tiempo, notas } = req.body;
-    
+
     const sql = 'UPDATE entrenamientos SET fecha = ?, tipo_ejercicio = ?, repeticiones = ?, series = ?, peso = ?, tiempo = ?, notas = ? WHERE id_entrenamiento = ?';
     db.query(sql, [fecha, tipo_ejercicio, repeticiones, series, peso, tiempo, notas, id_entrenamiento], (err, result) => {
         if (err) return res.status(500).json({ success: false, message: 'Error en el servidor' });
