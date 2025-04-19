@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
 
 .user-menu {
     position: absolute;
     left: 20px;
     top: 50%;
-    transform: translateY(-50%);
     z-index: 1000;
     font-family: Arial, sans-serif;
+    background: transparent;
 }
 
 /* --- CÍRCULO CON LA INICIAL --- */
@@ -25,16 +26,29 @@
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
-
     box-shadow: 0 0 8px rgba(57, 255, 20, 0.6);
     text-shadow: 0 0 5px #39ff14;
-
     cursor: pointer;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%) scale(1);
+    transform-origin: center center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+#user-trigger:hover {
+    box-shadow: 0 0 12px rgba(57, 255, 20, 0.8);
+    transform: translateY(-50%) scale(1.05);
+}
+
+#user-trigger:focus {
+    outline: none;
+  }
 
 /* --- DESPLEGABLE --- */
 #user-dropdown {
+    font-family: 'Creepster', cursive;
+    width: 100%;
     position: absolute;
     top: calc(100% + 8px);
     left: 0;
@@ -50,7 +64,6 @@
     pointer-events: none;
     overflow: hidden;
     transition: transform 0.25s ease-in-out,
-        /* Nos permite animar el recuadro */
         opacity 0.25s ease-in-out;
 }
 

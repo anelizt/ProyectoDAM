@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
 
-/* Fondo y cuerpo */
+/* --- FONDO Y CUERPO */
 body {
     margin: 0;
     padding: 0;
@@ -17,7 +17,7 @@ body {
     justify-content: center;
   }
   
-  /* Cabecera */
+  /* --- CABECERA --- */
   .header_inicio {
     font-family: 'Creepster', cursive;
     width: 100%;
@@ -39,7 +39,7 @@ body {
 
   }
   
-  /* Formularios */
+  /* --- FORMULARIOS --- */
   form {
     background-color: rgba(0, 0, 0, 0.85);
     padding: 30px;
@@ -79,7 +79,7 @@ body {
     box-shadow: 0 0 10px #39ff14;
   }
   
-  /* Botones */
+  /* --- BOTONES --- */
   .btn {
     background-color: #39ff14;
     color: black;
@@ -99,7 +99,7 @@ body {
     transform: scale(1.05);
   }
   
-  /* Mensajes */
+  /* ---MENSAJES --- */
   #login-mensaje, #register-mensaje {
     text-align: center;
     margin-top: 10px;
@@ -107,7 +107,7 @@ body {
     color: #ff4d4d;
   }
   
-  /* Sección registro */
+  /* --- SECCIÓN REGISTRO --- */
   .registro {
     display: flex;
     justify-content: center;
@@ -175,7 +175,7 @@ body {
   .hidden {
     display: none;
   }
-  /* Efecto aparición sombras*/
+  /* --- EFECTOS DE SOMBRAS --- */
 
   @keyframes fromTheShadows {
     0% {
