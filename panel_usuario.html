@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Panel de Usuario</title>
+    <link rel="icon" type="image/png" href="assets/zombi.png">
+    <link rel="stylesheet" href="panel_usuario.css">
+</head>
+
+<body>
+    <header class="header">
+        <div id="user-menu-placeholder"></div>
+        <h1>Panel de Usuario</h1>
+        <a href="index.html" id="back-trigger" aria-label="Volver al inicio">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 12 L12 3 L21 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path d="M5 12 V21 H19 V12 H5 Z" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M11 21 V15 H13 V21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </a>
+    </header>
+
+    <section class="profile-section">
+        <div class="profile-wrapper">
+            <div class="profile-circle" id="profile-initial"></div>
+            <div class="profile-info">
+                <p><strong>Nombre:</strong> <span id="user-name"></span></p>
+                <p><strong>Email:</strong> <span id="user-email"></span></p>
+                <p><strong>Fecha de Registro:</strong> <span id="user-date"></span></p>
+            </div>
+            <div id="delete-user" class="delete-user-icon" title="Eliminar mi cuenta"></div>
+        </div>
+    </section>
+
+    <script src="user_menu.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const nombre = localStorage.getItem("nombre") || "";
+            const email = localStorage.getItem("email") || "";
+            const registro = localStorage.getItem("registroFecha") || "";
+
+            const inicial = nombre.charAt(0).toUpperCase() || "?";
+            document.getElementById("profile-initial").innerText = inicial;
+            document.getElementById("user-name").innerText = nombre;
+            document.getElementById("user-email").innerText = email;
+            document.getElementById("user-date").innerText = registro;
+        });
+    </script>
+    <script>
+        // Script para borrar la cuenta de usuario
+        document.addEventListener("DOMContentLoaded", () => {
+          const delBtn = document.getElementById('delete-user');
+          delBtn.addEventListener('click', async () => {
+            if (!confirm('¿Estás seguro de que quieres eliminar tu cuenta? Esta acción es irreversible.')) {
+              return;
+            }
+            const id = localStorage.getItem('id_usuario');
+            try {
+              const resp = await fetch(`http://localhost:3000/usuarios/${id}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+              });
+              const data = await resp.json();
+              if (data.success) {
+                alert('Tu cuenta ha sido eliminada.');
+                localStorage.clear();
+                window.location.href = 'index.html';
+              } else {
+                alert('Error al eliminar la cuenta: ' + (data.message||'desconocido'));
+              }
+            } catch (err) {
+              console.error(err);
+              alert('Error de red al intentar eliminar la cuenta.');
+            }
+          });
+        });
+      </script>
+</body>
+
+</html>
