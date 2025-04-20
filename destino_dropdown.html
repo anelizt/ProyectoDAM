@@ -5,108 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrenamientos Zombi</title>
     <link rel="icon" type="image/png" href="assets/zombi.png">
-    <link rel="stylesheet" href="diario_entrenamiento.css">
+    <link rel="stylesheet" href="destino_dropdown.css">
 </head>
 <body>
 
     <header>
-        <h1>Entrenamientos</h1>
-        <nav>
-           <a href="index.html" class="zombi-btn"></a>
-        </nav>
-    </header>
-    <!--  <h1>Entrenamientos</h1> -->
-    
-    <section id="inicio">
-        <h2>Cardio de Supervivencia: Escape Zombi (HIIT + Cardio)</h2>
-        <ul>
-            <li>- Circuito de intervalos con carreras, saltos y esquivas.</li>
-            <li>- Se usan alarmas o sonidos para simular persecuciones.</li>
-            <li>- Gana quien logre “sobrevivir” hasta el final sin ser “infectado”.</li>
-        </ul>
-    </section>
-    
-    <section id="entrenamiento">
-        <h2>Modo Horda (Entrenamiento en Grupo)</h2>
-        <ul>
-            <li>- Se forman grupos y deben superar obstáculos juntos.</li>
-            <li>- Si alguien “cae” (no cumple un ejercicio), el equipo debe ayudarlo.</li>
-            <li>- Trabajo en equipo o todos pierden.</li>
-        </ul>
-    </section>
-    
-    <section id="bootcamp">
-        <h2>Zombie Bootcamp: Operación Fortaleza (Funcional + Supervivencia)</h2>
-        <ul>
-            <li>- Entrenamiento en circuito con obstáculos, cuerdas y peso corporal.</li>
-            <li>- Simula construir una base segura (levantar peso, trepar, arrastrarse).</li>
-            <li>- ¡El refugio solo está listo si todos completan el reto!</li>
-        </ul>
-    </section>
-    
-    <section id="fatiga">
-        <h2>Fatiga Post-Apocalipsis: Resistencia del Último Sobreviviente (Fuerza + Aguante)</h2>
-        <ul>
-            <li>- Pruebas de resistencia con pesas, cuerda de batalla y burpees.</li>
-            <li>- Simula cargar provisiones o escapar con mochilas pesadas.</li>
-            <li>- Solo los más fuertes llegan al final.</li>
-        </ul>
-    </section>
-    
-    <h1>Objetivos</h1>
+        <div id="user-menu-placeholder"></div>
+        <h1>Zombie Bootcamp</h1>
+        <a href="index.html" id="back-trigger" aria-label="Volver al inicio">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 12 L12 3 L21 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M5 12 V21 H19 V12 H5 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M11 21 V15 H13 V21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </a>
+      </header>
 
-    <section id="objetivos">
+    <h1 id="objetivosT" class="fade-section">Objetivos</h1>
+
+    <section id="objetivos" class="fade-section">
         <h3>Velocidad de Escape – “Corre o Muere”</h3>
         <p>Objetivo: Mejorar la velocidad y resistencia cardiovascular para huir de los zombis.</p>
-        <ul>
-            <li>Escape Zombi (HIIT + Cardio)</li>
-            <li>Corre o Muere (Sprint + Parkour)</li>
-            <li>Caminantes vs. Corredores (Resistencia)</li>
-        </ul>
+
+            <p>Escape Zombi (HIIT + Cardio)</p>
+            <p>Corre o Muere (Sprint + Parkour)</p>
+            <p>Caminantes vs. Corredores (Resistencia)</p>
+
     </section>
 
-    <section id="agilidad">
+    <section id="agilidad" class="fade-section">
         <h3>Agilidad y Evasión – “Deslízate entre la Horda”</h3>
         <p>Objetivo: Mejorar la movilidad, coordinación y reflejos para esquivar ataques.</p>
-        <ul>
-            <li>Corre o Muere (Sprint + Parkour)</li>
-            <li>Modo Horda (Trabajo en Equipo + Coordinación)</li>
-            <li>Caminantes vs. Corredores (Cambio de Ritmo)</li>
-        </ul>
+
+            <p>Corre o Muere (Sprint + Parkour)</p>
+            <p>Modo Horda (Trabajo en Equipo + Coordinación)</p>
+            <p>Caminantes vs. Corredores (Cambio de Ritmo)</p>
+
     </section>    
 
-    <section id="combate">
+    <section id="combate" class="fade-section">
         <h3>Combate y Defensa – “Mata o Sé Mordido” </h3>
         <p>Objetivo: Mejorar reflejos, golpes y técnicas para enfrentar un ataque zombi.</p>
-        <ul>
-            <li>Zombie Bootcamp (Combate + Resistencia) → Golpes con sacos, sprints y cardio extremo.</li>
-            <li>Operación Cabeza Fría (Reflejos + Golpes) → Prácticas de reacción y combate.</li>
-            <li>Misión Rescate (Explosividad + Velocidad) → Sprint y técnicas para sacar a un aliado de peligro.</li>
-        </ul>
+
+            <p>Zombie Bootcamp (Combate + Resistencia) → Golpes con sacos, sprints y cardio extremo.</p>
+            <p>Operación Cabeza Fría (Reflejos + Golpes) → Prácticas de reacción y combate.</p>
+            <p>Misión Rescate (Explosividad + Velocidad) → Sprint y técnicas para sacar a un aliado de peligro.</p>
+
     </section>
 
-    <section id="resistencia">
+    <section id="resistencia" class="fade-section">
         <h3>Resistencia Extrema – “El Último Humano” </h3>
         <p>Objetivo: Aguantar hasta el final del apocalipsis sin caer rendido.</p>
-        <ul>
-            <li>Fatiga Post-Apocalipsis (Recuperación + Resistencia Larga) → Ejercicios de largo rendimiento.</li>
-            <li>Zombie Bootcamp (Combate + Cardio) → Circuitos sin pausa con descanso mínimo.</li>
-            <li>El Último Humano (Pruebas Extremas) → Sesión final donde solo uno sobrevive.</li>
-        </ul>
+
+            <p>Fatiga Post-Apocalipsis (Recuperación + Resistencia Larga) → Ejercicios de largo rendimiento.</p>
+            <p>Zombie Bootcamp (Combate + Cardio) → Circuitos sin pausa con descanso mínimo.</p>
+            <p>El Último Humano (Pruebas Extremas) → Sesión final donde solo uno sobrevive.</p>
+
     </section>
     
-    <h1>Formación</h1>
+    <h1 id="formacionT" class="fade-section">Formación</h1>
 
-    <section id="formacion">
+    <section id="formacion" class="fade-section">
         <h3>Curso Intensivo – “Zombi Weekend Challenge”</h3>
         <p>Objetivo: Sobrevivir 48 horas en modo entrenamiento extremo.</p>
-        <ul>
-            <li>Duración: 2 días (sábado y domingo).</li>
-            <li>Entrenamiento funcional + carreras de obstáculos.</li>
-            <li>Escenarios de escape y persecución con entrenadores “zombis”.</li>
-            <li>Defensa y combate en situaciones límite.</li>
-            <li>Desafío final: La Última Mordida – Si fallas, te vuelves zombi.</li>
-        </ul>
+
+            <p>Duración: 2 días (sábado y domingo).</p>
+            <p>Entrenamiento funcional + carreras de obstáculos.</p>
+            <p>Escenarios de escape y persecución con entrenadores “zombis”.</p>
+            <p>Defensa y combate en situaciones límite.</p>
+            <p>Desafío final: La Última Mordida – Si fallas, te vuelves zombi.</p>
+
         <br>
         <video width="600" controls>
             <source src="assets/cricuito_maincraft-VEED.mp4" type="video/mp4">
@@ -141,14 +112,16 @@
 
     </section>
     
-    <h1>Sobre Nosotros</h1>
+    <h1 id="aboutT" class="fade-section">Sobre Nosotros</h1>
 
-    <section id="sobre-nosotros">
+    <section id="about" class="fade-section">
         <h3>Equipo</h3>
         <p>Un grupo de apasionados por los zombies, el deporte y el desarrollo informático.</p>
         <br>
         <h3>Misión</h3>
         <p>Proyecto de Desarrollo de Aplicaciones Multiplataforma para mejorar la preparación física y mental en situaciones extremas.</p>
     </section>
+
+    <script src="user_menu.js"></script>
 </body>
 </html>

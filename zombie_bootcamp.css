@@ -74,10 +74,10 @@ header h1 {
 /* --- GRID DE TARJETAS --- */
 .grid-ejercicios {
   display: grid;
-  grid-template-columns: repeat(3, 400px);
-  gap: 20px;
+  grid-template-columns: repeat(2, 400px);
   justify-content: center;
-  margin: 0 auto;
+  align-content: center;
+
 }
 
 .flip-card {

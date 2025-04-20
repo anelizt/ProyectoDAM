@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
 
 .user-menu {
-    position: absolute;     /* dentro de .header, ya posicionado */
+    position: absolute;
     top: 50%;
     left: 20px;
     z-index: 1000;
