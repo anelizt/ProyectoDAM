@@ -6,7 +6,11 @@ const jwt = require('jsonwebtoken');
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['Authorization']
+}));
 app.use(express.static(__dirname));
 
 const db = mysql.createConnection({
@@ -52,7 +56,9 @@ app.post('/register', (req, res) => {
         const sql = 'INSERT INTO usuarios (nombre, email, contraseña, rol) VALUES (?, ?, ?, ?)';
         db.query(sql, [nombre, email, hash, 'usuario'], (err, result) => {
             if (err) return res.status(500).json({ success: false, message: 'Error al registrar usuario' });
-            res.json({ success: true, message: 'Usuario registrado correctamente', id_usuario: result.insertId });
+
+            const token = jwt.sign({ id: result.insertId, rol: 'usuario' }, secretKey, { expiresIn: '1h' });
+            res.json({ success: true, message: 'Usuario registrado correctamente', id_usuario: result.insertId, nombre, email, token});
         });
     });
 });
@@ -79,7 +85,8 @@ app.get('/user_menu', (req, res) => {
                 return res.status(404).json({ success: false, message: 'Usuario no encontrado' });
             }
             const user = results[0];
-            res.json({success: true,
+            res.json({
+                success: true,
                 usuario: {
                     id_usuario: user.id_usuario, nombre: user.nombre, email: user.email, rol: user.rol, fechaRegistro: user.fechaRegistro
                 }
