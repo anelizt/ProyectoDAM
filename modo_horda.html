@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Modo Horda</title>
+  <link rel="stylesheet" href="main.css" />
+  <link rel="stylesheet" href="horda.css" />
+</head>
+<body>
+
+  <!-- Botón para volver -->
+  <a href="index.html" class="back-button">¿Huyes como un humano cobarde?</a>
+
+  <main class="cardio-container">
+    <section class="intro">
+      <h1>Modo Horda</h1>
+      <p>
+        ¿Eres un zombie falto de motivación? ¿Crees que todos los humanos son gordos y te va a ser fácil capturar sus cerebros?
+        Echa un vistazo a la siguiente simulación y comprueba cuánto necesitas entrenar para no quedarte sin esos jugosos
+        cerebros.
+      </p>
+    </section>
+
+  <section id="minijuego" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh;">
+    <div class="minijuego-instrucciones" style="color: white; max-width: 1000px; text-align: left;">
+      <h2 style="font-size: 2.5rem; color: #39ff14; text-align: center;">🎮 Instrucciones del Minijuego Horda</h2>
+      <ul style="list-style: disc; margin-top: 1rem; font-size: 1.5rem; padding-left: 4rem;">
+        <li><strong>Presiona la barra espaciadora</strong> para que el zombi salte.</li>
+        <li>Esquiva los obstáculos rojos que aparecen en el camino.</li>
+        <li>Tu objetivo es perseguir al humano y sobrevivir lo máximo posible.</li>
+        <li>Si chocas, verás un mensaje... ¡y tendrás que volver a intentarlo!</li>
+      </ul>
+    </div>
+    <button id="start-minijuego" class="start-button" style="margin-top: 0rem; padding: 0.8rem 2rem; font-size: 1.2rem; font-weight: bold; background-color: #39ff14; border: none; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); transition: transform 0.2s;">🧟‍♂️ Iniciar Minijuego Horda</button>
+    <canvas id="gameCanvas" width="1000" height="300" style="display: none; border: 4px solid #39ff14; margin-top: 2rem;"></canvas>
+  </section>
+  <script src="minijuegohorda.js"></script>
+  <script src="turncards.js"></script>
+  <script>
+    document.getElementById('start-minijuego').addEventListener('click', (e) => {
+      e.target.blur();
+      const gameContainer = document.getElementById('gameCanvas');
+      gameContainer.style.display = 'block';
+      iniciarMinijuegoHorda();
+    });
+  </script>
+</body>
+</html>

@@ -4,17 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cardio de Supervivencia</title>
-  <link rel="stylesheet" href="../main.css" />
+  <link rel="stylesheet" href="main.css" />
   <link rel="stylesheet" href="cardio.css" />
 </head>
 <body>
-
-  <!-- Botón para volver -->
-  <a href="../index.html" class="back-button">¿Huyes como un humano cobarde?</a>
+  <header>
+    <div id="user-menu-placeholder"></div>
+    <h1>Cardio de Supervivencia</h1>
+    <a href="index.html" id="back-trigger" aria-label="Volver al inicio">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 12 L12 3 L21 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5 12 V21 H19 V12 H5 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M11 21 V15 H13 V21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+      </a>
+</header>
 
   <main class="cardio-container">
     <section class="intro">
-      <h1>Cardio de Supervivencia</h1>
       <p>
         El corazón no muerto también necesita un buen bombeo. Estos ejercicios están diseñados para que nuestros zombies desarrollen resistencia y mejoren su capacidad para perseguir presas humanas a toda velocidad sin perder extremidades.
       </p>
@@ -25,7 +32,7 @@
       <div class="flip-card">
         <div class="flip-card-inner">
           <div class="flip-card-front">
-            <img src="../assets/cardiosupervivencia/cintacorrer.png" alt="Ejercicio 1">
+            <img src="assets/cardiosupervivencia/cintacorrer.png" alt="Ejercicio 1">
           </div>
           <div class="flip-card-back">
             <h2>Trota en tu tumba</h2>
@@ -40,7 +47,7 @@
       <div class="flip-card">
         <div class="flip-card-inner">
           <div class="flip-card-front">
-            <img src="../assets/cardiosupervivencia/escalera.png" alt="Ejercicio 2">
+            <img src="assets/cardiosupervivencia/escalera.png" alt="Ejercicio 2">
           </div>
           <div class="flip-card-back">
             <h2>Escalera de la cripta</h2>
@@ -55,7 +62,7 @@
       <div class="flip-card">
         <div class="flip-card-inner">
           <div class="flip-card-front">
-            <img src="../assets/cardiosupervivencia/girocerebral.png" alt="Ejercicio 3">
+            <img src="assets/cardiosupervivencia/girocerebral.png" alt="Ejercicio 3">
           </div>
           <div class="flip-card-back">
             <h2>Giro cerebral</h2>
@@ -70,7 +77,7 @@
       <div class="flip-card">
         <div class="flip-card-inner">
           <div class="flip-card-front">
-            <img src="../assets/cardiosupervivencia/arrastre.png" alt="Ejercicio 4">
+            <img src="assets/cardiosupervivencia/arrastre.png" alt="Ejercicio 4">
           </div>
           <div class="flip-card-back">
             <h2>Arrastre del cementerio</h2>
@@ -85,7 +92,7 @@
       <div class="flip-card">
         <div class="flip-card-inner">
           <div class="flip-card-front">
-            <img src="../assets/cardiosupervivencia/zancada.png" alt="Ejercicio 5">
+            <img src="assets/cardiosupervivencia/zancada.png" alt="Ejercicio 5">
           </div>
           <div class="flip-card-back">
             <h2>Zancada Mortal</h2>
@@ -100,7 +107,7 @@
       <div class="flip-card">
         <div class="flip-card-inner">
           <div class="flip-card-front">
-            <img src="../assets/cardiosupervivencia/sprint.png" alt="Ejercicio 6">
+            <img src="assets/cardiosupervivencia/sprint.png" alt="Ejercicio 6">
           </div>
           <div class="flip-card-back">
             <h2>Corre tras tu comida</h2>
@@ -113,6 +120,14 @@
     </section>
   </main>
 
+  <script src="user_menu.js"></script>
   <script src="turncards.js"></script>
+  <!-- Esto aplica un efecto de desvanecimineto en el texto de la página cuando scrolleamos hacia arriba -->
+  <script type="module">
+    import { initDesvanecer } from './efecto_desvanecer.js';
+    window.addEventListener('DOMContentLoaded', () => {
+      initDesvanecer('.intro p');
+    });
+  </script>
 </body>
 </html>

@@ -38,6 +38,21 @@ body {
     text-align: center;
 
   }
+
+  .back-button {
+    position: fixed;
+    top: 20vh;
+    left: 30px;
+    background-color: #5a1e1e;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    z-index: 1000;
+    font-size: 1rem;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
   
   /* --- FORMULARIOS --- */
   form {
@@ -197,4 +212,40 @@ body {
     position: relative;
     animation: fromTheShadows 0.5s ease-out;
   }
+
+  @media screen and (max-width: 768px) {
+  
+    .back-button {
+      font-size: 0.9rem;
+      padding: 8px 12px;
+    }
+  }
+
+  @keyframes shake {
+    0%   { transform: translateX(0); }
+    25%  { transform: translateX(-3px); }
+    50%  { transform: translateX(3px); }
+    75%  { transform: translateX(-3px); }
+    100% { transform: translateX(0); }
+  }
+  
+  @keyframes neonGlow {
+    0%   { text-shadow: 0 0 5px #fff, 0 0 10px red; }
+    50%  { text-shadow: 0 0 20px red, 0 0 30px red; }
+    100% { text-shadow: 0 0 5px #fff, 0 0 10px red; }
+  }
+  
+  @keyframes fadePulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.6; }
+  }
+
+  .back-button:hover {
+    animation:
+      shake     0.5s ease-in-out infinite,
+      neonGlow  1.5s infinite alternate,
+      fadePulse 2s infinite;
+    cursor: pointer;
+  }
+  
   
