@@ -1,9 +1,7 @@
 @import url('./cardio.css');
 
-/* MODO HORDA: Personalización temática adicional */
-
 body {
-  background-image: url('../assets/landing.jpeg');
+  background-image: url('assets/sala_zombie.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -18,22 +16,6 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-}
-
-/* Personalización por roles */
-.aplastador .flip-card-back {
-  border: 2px solid crimson;
-  background-color: rgba(60, 0, 0, 0.8);
-}
-
-.rastreador .flip-card-back {
-  border: 2px dashed #39ff14;
-  background-color: rgba(0, 30, 0, 0.7);
-}
-
-.saltador .flip-card-back {
-  border: 2px dotted #00aaff;
-  background-color: rgba(0, 0, 40, 0.7);
 }
 
 .minijuego-instrucciones {

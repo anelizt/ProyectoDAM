@@ -1,31 +1,53 @@
+/* --- RESET Y BASE --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  background-image: url('../assets/landing.jpeg');
+  font-family: 'Arial', sans-serif;
+  background-image: url('assets/sala_zombie.png');
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
-  min-height: 100vh;
-  filter: brightness(1.2);
+  background-attachment: fixed;
+  color: #e0e0e0;
+  text-align: center;
+  padding-top: 100px;
 }
 
-.back-button {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  background-color: #5a1e1e;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 5px;
-  text-decoration: none;
-  z-index: 1000;
-  font-size: 1rem;
+/* --- ENCABEZADO -- */
+header {
+  font-family: 'Creepster', cursive;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #39ff14;
+  text-align: center;
+  padding: 20px;
+  font-size: 2rem;
   font-weight: bold;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  animation: shake 0.5s infinite, neonGlow 1.5s infinite, fadePulse 1s infinite;
+  text-shadow: 0 0 2px #39ff14;
+  box-shadow: 0 0 4px black;
+  position: fixed;
+  top: 0vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  width: 100%;
+  text-align: center;
 }
 
+header h1 {
+  font-size: 2.5rem;
+  color: #39ff14;
+  text-shadow: 0 0 3px #39ff14;
+}
+
+/* --- TEXTO SECCIÓN --- */
 .cardio-container {
-  max-width: 1200px;
-  margin: 120px auto 60px auto;
+  max-width: 100%;
+  margin: 30px auto 60px auto;
   padding: 0 20px;
   text-align: center;
 }
@@ -44,19 +66,23 @@ body {
   max-width: 700px;
   margin: 0 auto 30px;
 }
+.intro p {
+  transition: opacity 0.1s linear;
+  opacity: 1;
+}
 
+/* --- GRID DE TARJETAS --- */
 .grid-ejercicios {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-  justify-items: center;
+  grid-template-columns: repeat(3, 400px);
+  gap: 20px;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .flip-card {
-  background-color: transparent;
   width: 300px;
   height: 400px;
-  perspective: 1000px;
   overflow: hidden;
 }
 
@@ -138,7 +164,7 @@ body {
 @media screen and (max-width: 768px) {
   .grid-ejercicios {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 10px;
   }
 
   .flip-card {
@@ -156,21 +182,30 @@ body {
   }
 }
 
-@keyframes shake {
-  0%   { transform: translateX(0); }
-  25%  { transform: translateX(-3px); }
-  50%  { transform: translateX(3px); }
-  75%  { transform: translateX(-3px); }
-  100% { transform: translateX(0); }
+/* —-- BOTÓN INICIO CASITA —-- */
+#back-trigger {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border: 2px solid #39ff14;
+  background: transparent;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(57, 255, 20, 0.6);
+  color: #39ff14;
+  text-shadow: 0 0 5px #39ff14;
 }
 
-@keyframes neonGlow {
-  0%   { text-shadow: 0 0 5px #fff, 0 0 10px red; }
-  50%  { text-shadow: 0 0 20px red, 0 0 30px red; }
-  100% { text-shadow: 0 0 5px #fff, 0 0 10px red; }
-}
-
-@keyframes fadePulse {
-  0%, 100% { opacity: 1; }
-  50%      { opacity: 0.6; }
+#back-trigger svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
 }
