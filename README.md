@@ -10,11 +10,15 @@ Este proyecto es una simulación interactiva de entrenamiento en clave de humor 
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/anelizt/Zombie_Escape_Training.git
+   git clone https://github.com/anelizt/ProyectoDAM.git
 2. Ábrelo en tu IDE favorito.
-3. Si es la primera vez, borra las carpetas node_modules y el archivo package-lock.json y, desde la terminal, lanza el comando ```npm install
-4. Lanza el servidor en local con el comando ```node server.js
-5. Necesitarás una base de datos en un gestor como phpMyAdmin para poder simular un registro / login.
+3. Si es la primera vez, borra las carpetas node_modules y el archivo package-lock.json y, desde la terminal, lanza el comando:
+    ```bash
+   npm install
+6. Lanza el servidor en local con el comando:
+   ```bash
+   node server.js
+8. Necesitarás una base de datos en un gestor como phpMyAdmin para poder simular un registro / login.
 
 ## Capturas
 
