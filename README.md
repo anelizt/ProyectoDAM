@@ -2,7 +2,7 @@
 
 Proyecto final para el ciclo formativo de **Desarrollo de Aplicaciones Multiplataforma (DAM)**.
 
-Este proyecto es una simulación interactiva de entrenamiento para escapar de un apocalipsis zombie. Fue desarrollado como parte del módulo de Proyecto de Desarrollo de Aplicaciones Multiplataforma.
+Este proyecto es una simulación interactiva de entrenamiento en clave de humor donde unos zombies se fortalecen contra los humanos. Fue desarrollado como parte del módulo de Proyecto de Desarrollo de Aplicaciones Multiplataforma.
 
 ---
 
@@ -10,9 +10,11 @@ Este proyecto es una simulación interactiva de entrenamiento para escapar de un
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/S1371582/Zombie_Escape_Training.git
+   git clone https://github.com/anelizt/Zombie_Escape_Training.git
 2. Ábrelo en tu IDE favorito.
-3. Ejecuta el archivo principal.
+3. Si es la primera vez, borra las carpetas node_modules y el archivo package-lock.json y, desde la terminal, lanza el comando ```npm install
+4. Lanza el servidor en local con el comando ```node server.js
+5. Necesitarás una base de datos en un gestor como phpMyAdmin para poder simular un registro / login.
 
 ## Capturas
 
