@@ -133,28 +133,24 @@ h3 {
     transform: translateY(-50%) scale(1.05);
 }
 /* --- GALERÍA --- */
-/* Galería: filas flexibles con separación */
 .galeria {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: center; /* centra las imágenes */
+    justify-content: center;
   }
   
-  /* Cada elemento de la galería ocupa hasta un 30% del ancho del contenedor, 
-     ajusta el porcentaje a tu gusto (por ejemplo 45% para dos por fila) */
   .galeria a {
     flex: 1 1 30%;
     max-width: 30%;
   }
-  
-  /* La imagen ocupa todo el ancho de su contenedor, mantiene su ratio y no se distorsiona */
+
   .galeria img {
     display: block;
     width: 100%;
     height: auto;
-    object-fit: cover; /* recorta bordes si hace falta, o usa `contain` si prefieres que quepa-entera */
-    border-radius: 5px; /* opcional, para redondear esquinas */
+    object-fit: cover;
+    border-radius: 5px;
   }
 
   #objetivosT,
