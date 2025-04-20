@@ -249,9 +249,11 @@
                 .then(data => {
                     if (data.success) {
                         let entrenamiento = data.entrenamiento;
+                        const rawFecha = entrenamiento.fecha;
+                        const fechaSp = rawFecha.split("T")[0];
 
                        // Para la fecha sea recuperada al editar entreno
-                        document.getElementById("fecha").value = entrenamiento.fecha;
+                        document.getElementById("fecha").value = fechaSp;
                         document.getElementById("tipo_ejercicio").value = entrenamiento.tipo_ejercicio;
                         document.getElementById("repeticiones").value = entrenamiento.repeticiones;
                         document.getElementById("series").value = entrenamiento.series;
